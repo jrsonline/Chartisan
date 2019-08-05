@@ -76,9 +76,8 @@ struct Cartesian : CoordinateSystem {
     
     /// Figure out the scales given the axes requested, and the plots
 
-    func determineGuideScales<D>(data: [D?], plots: [ChartPlot<D>], labels: [String?]) ->
+    func determineGuideScales<D>(data: [D], plots: [ChartPlot<D>], labels: [String?]) ->
         [GuidePlacement : DeterminedScale]
-        where D : Identifiable
     {
         var chartGuideDeterminedScale : [GuidePlacement : DeterminedScale] = [:]
         

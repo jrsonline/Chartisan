@@ -9,22 +9,20 @@
 import SwiftUI
 
 
-struct Chart<D:Identifiable> : View
-where D.IdentifiedValue == D, D.ID == Int
+struct Chart<D> : View
 {
     let size: CGSize
-    let data: [D?]
-    let labels: (D?) -> String?
+    let data: [D]
+    let labels: (D) -> String?
     let coords: CoordinateSystem
     let plots: [ChartPlot<D>]
     let annotations: [AnyView] = []
     let blendMode: ChartLayerBlendMode
-    let indexedData: [IndexedItem<D?>]  // working round a compiler bug
     
     init(
         size: CGSize = CGSize(width:200, height:200),
-        data: [D?],
-        labels: @escaping (D?) -> String? = { d in d == nil ? "" : "\(d.id)" },
+        data: [D],
+        labels: @escaping (D) -> String? = { d in "\(d)" },
         coords: CoordinateSystem = Cartesian(axes:[.xAxis : .allLabels, .yAxis : .linearGuide ]),
         plots: [ChartPlot<D>],
   //      annotations: [AnyView] = [],
@@ -37,12 +35,11 @@ where D.IdentifiedValue == D, D.ID == Int
         self.plots = plots
  //       self.annotations = annotations
         self.blendMode = blendMode
-        self.indexedData = IndexedItem.box(data)
     }
     
     init(
         size: CGSize = CGSize(width:200, height:200),
-        data: [D?],
+        data: [D],
         labels: KeyPath<D,String>,
         coords: CoordinateSystem,
         plots: [ChartPlot<D>],
@@ -56,7 +53,6 @@ where D.IdentifiedValue == D, D.ID == Int
         self.plots = plots
   //      self.annotations = annotations
         self.blendMode = blendMode
-        self.indexedData = IndexedItem.box(data)
     }
     
     /// Determine the scales to use given the guides requested by each chart, and the axes chosen
@@ -92,7 +88,7 @@ where D.IdentifiedValue == D, D.ID == Int
     }
     
     func renderPlot(plot: ChartPlot<D>, scales: [GuidePlacement : DeterminedScale]) -> AnyView {
-        return plot.render(withCoords: self.coords, ofSize: self.size, for: self.indexedData, scales: scales)
+        return plot.render(withCoords: self.coords, ofSize: self.size, for: self.data, scales: scales)
     }
  
     var body: some View {

@@ -11,16 +11,15 @@ import SwiftUI
 
 import Foundation
 
-class ChartPlot<D : Identifiable> : Identifiable
-where D.IdentifiedValue == D, D.ID == Int
+class ChartPlot<D> : Identifiable
 {
     let id: UUID = UUID()
     
-    func render(withCoords coords: CoordinateSystem, ofSize size: CGSize, for data:[IndexedItem<D?>], scales: [GuidePlacement : DeterminedScale]) -> AnyView {
+    func render(withCoords coords: CoordinateSystem, ofSize size: CGSize, for data:[D], scales: [GuidePlacement : DeterminedScale]) -> AnyView {
         return EmptyView().asAnyView
     }
     
-    func mappingForGuidePlacement(_ placement: GuidePlacement) -> [(D) -> Double] {
+    func mappingForGuidePlacement(_ placement: GuidePlacement) -> [(D) -> Double?] {
         return []
     }
     

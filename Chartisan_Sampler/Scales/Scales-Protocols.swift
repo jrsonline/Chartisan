@@ -10,7 +10,7 @@ import Foundation
 
 protocol GuideScale {
     init()
-    mutating func mergeData<D>(data:[D?], mappings:[(D) -> Double])
+    mutating func mergeData<D>(data:[D], mappings:[(D) -> Double?])
     func format(_ value: Double) -> String
     func interceptPosn() -> UnitValue
     func majorSteps() -> [ChartStep<Double>]

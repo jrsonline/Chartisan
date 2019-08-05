@@ -16,21 +16,17 @@ struct LinearScale : GuideScale {
     init() {
     }
     /// Merge existing data with new data and mappings
-    mutating func mergeData<D>(data: [D?], mappings: [(D) -> Double]) {
+    mutating func mergeData<D>(data: [D], mappings: [(D) -> Double?]) {
         (self.min, self.max, self.chartSteps) = self.computeMaxMinSteps(forData: data, mappings: mappings)
     }
     
-    private func computeMaxMinSteps<D>(forData rawData: [D?],  mappings: [(D) -> Double])
+    private func computeMaxMinSteps<D>(forData rawData: [D],  mappings: [(D) -> Double?])
     -> (min: Double, max: Double, chartSteps: [ChartStep<Double>])
     {
         // pick out just the data we are interested in (nb, this could be more efficient, not great for very large datasets)
         // if we have multiple mappings for a datapoint, we look at all of them
-        let data = rawData.flatMap { (d:D?) -> [Double] in
-            if let datum = d {
-                return mappings.map { f in f(datum) }
-            } else {
-                return Array<Double>()
-            }
+        let data = rawData.flatMap { (datum:D) -> [Double] in
+            return mappings.compactMap { f in f(datum) }
         }
         return self.linearScaleCalculator(data: data, currentMin: self.min, currentMax: self.max)
     }

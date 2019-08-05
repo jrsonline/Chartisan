@@ -9,7 +9,7 @@
 import SwiftUI
 
 protocol CoordinateSystem {
-    func determineGuideScales<D:Identifiable>(data:[D?], plots: [ChartPlot<D>], labels:[String?]) -> [GuidePlacement : DeterminedScale]
+    func determineGuideScales<D>(data:[D], plots: [ChartPlot<D>], labels:[String?]) -> [GuidePlacement : DeterminedScale]
     func drawAxes(chartSize: CGSize, forDeterminedScales scales: [GuidePlacement:DeterminedScale]) -> AnyView
     func drawBox(chartSize: CGSize, at: UnitPoint, size: UnitSize, forScale: GuideScale) -> Path
     func drawLine(chartSize: CGSize, from: UnitPoint, to: UnitPoint, forScale: GuideScale) -> Path

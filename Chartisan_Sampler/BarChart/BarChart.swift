@@ -27,8 +27,7 @@ where Wrapped:Identifiable, Wrapped.ID == Int, Wrapped.IdentifiedValue == Wrappe
     }}
 }
 
-class BarChart<D:Identifiable> : ChartPlot<D>
-where D.IdentifiedValue == D, D.ID == Int
+class BarChart<D> : ChartPlot<D>
 {
     let slices : [BarSlice<D>]
     let barConfiguration : BarConfiguration
@@ -43,7 +42,7 @@ where D.IdentifiedValue == D, D.ID == Int
     }
     
     convenience init(
-            size:@escaping (D) -> Double,
+            size:@escaping (D) -> (Double?),
             guide: GuidePlacement = .yAxis,
             annotation: String = "",
             min:@escaping (D) -> Double = { _ in 0},  // change to 'min'
@@ -65,6 +64,28 @@ where D.IdentifiedValue == D, D.ID == Int
     }
 
     
+    convenience init( sizeOrNil:KeyPath<D,Double?>,
+                     guide: GuidePlacement = .yAxis,
+                     annotation: String = "",
+                     min:(KeyPath<D,Double>)? = nil,
+                     colour:ChartColour<D> = .stripe(.green,.blue),
+                     width:(KeyPath<D,Double>)? = nil,
+                     dodge:@escaping (D) -> Double = { _ in 0.0},
+                     barConfiguration: BarConfiguration = BarConfiguration()) {
+        
+        self.init(slices: [BarSlice(label: annotation,
+                                    height:{ d in d[keyPath: sizeOrNil] },
+                                    guide: guide,
+                                    bottom: min == nil ? { _ in 0} : { d in d[keyPath: min!] },
+                                    width: width == nil ? { _ in 1.0} : { d in d[keyPath: width!] },
+                                    dodge: dodge,
+                                    colour: colour
+
+            )],
+                  barConfiguration: barConfiguration
+        )
+    }
+        
     convenience init( size:KeyPath<D,Double>,
                      guide: GuidePlacement = .yAxis,
                      annotation: String = "",
@@ -85,14 +106,15 @@ where D.IdentifiedValue == D, D.ID == Int
             )],
                   barConfiguration: barConfiguration
         )
+
     }
     
 
-    func bar(coords: CoordinateSystem, slice: BarSlice<D>, withItem dataItem: D?, ofNumber n: Int, fromSize plotSize: CGSize, scalingBy gscale: GuideScale?) -> Path {
+    func bar(coords: CoordinateSystem, slice: BarSlice<D>, withItem item: D, ofNumber n: Int, fromSize plotSize: CGSize, scalingBy gscale: GuideScale?) -> Path {
         guard let scale = gscale else { fatalError("No guide scale provided for bar chart")}
         
         // if the data item is nil, we don't draw anything
-        guard let item = dataItem else {
+        guard let top = slice.top(item) else {
             return coords.drawBox(chartSize: plotSize,
                                   at: UnitPoint.zero,
                                   size: UnitSize.zero,
@@ -101,7 +123,7 @@ where D.IdentifiedValue == D, D.ID == Int
         
         let floating = scale[slice.bottom(item)]
 
-        let barHeight = UnitValue(floating - scale[slice.top(item)])
+        let barHeight = UnitValue(floating - scale[top])
 
         let barSize = UnitSize( width: UnitValue( (slice.width(item) / n.asDouble) * self.barConfiguration.barWidth),
                              height: barHeight)
@@ -114,15 +136,16 @@ where D.IdentifiedValue == D, D.ID == Int
                               forScale: scale)
     }
     
-    override func render(withCoords coords: CoordinateSystem, ofSize size: CGSize, for data:[IndexedItem<D?>], scales: [GuidePlacement : DeterminedScale]) -> AnyView {
+    override func render(withCoords coords: CoordinateSystem, ofSize size: CGSize, for data:[D], scales: [GuidePlacement : DeterminedScale]) -> AnyView {
         guard !data.isEmpty else { return EmptyView().asAnyView }
         
         let indexableSlices = IndexedItem.box(slices)
+        let indexableData = IndexedItem.box(data)
         
         return
             ZStack {  ForEach(indexableSlices) { slice in
                 HStack(spacing: CGFloat(self.barConfiguration.barGap)) {
-                    ForEach(data) { d in
+                    ForEach(indexableData) { d in
                         self.bar(coords: coords,
                               slice: slice.dt,
                               withItem: d.dt,
@@ -137,7 +160,7 @@ where D.IdentifiedValue == D, D.ID == Int
         .asAnyView
     }
     
-    override func mappingForGuidePlacement(_ placement: GuidePlacement) -> [(D) -> Double] {
+    override func mappingForGuidePlacement(_ placement: GuidePlacement) -> [(D) -> Double?] {
         // find slices with indicated placement.
         return self.slices.filter ({ $0.guide == placement }).map( {$0.top })
     }

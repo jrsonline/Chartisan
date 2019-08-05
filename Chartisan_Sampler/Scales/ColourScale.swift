@@ -15,6 +15,7 @@ enum ChartColour<D> {
     case fixed(Color)
     case flag(KeyPath<D,Bool>, ifTrue:Color, ifFalse:Color)
 //    case posNeg(value:(D) -> Double, pos:Color, neg:Color)
+    case posNegNil(KeyPath<D,Double?>, pos:Color, neg:Color)
     case posNeg(KeyPath<D,Double>, pos:Color, neg:Color)
  //   case top(Int, in:Color, out:Color)   TODO
     case custom((Int, D) -> Color)
@@ -26,7 +27,11 @@ enum ChartColour<D> {
             case let .stripeAll(cs): return cs[loop:idx]
             case let .fixed(c): return c
 //            case let .posNeg(value: value, pos: posCol, neg: negCol): if value(datum) < 0 { return negCol} else { return posCol }
-            case let .posNeg(path, pos: posCol, neg: negCol): if datum[keyPath:path] < 0 { return negCol} else { return posCol }
+            case let .posNegNil(path, pos: posCol, neg: negCol):
+                guard let data = datum[keyPath:path] else { return .clear }
+                if data < 0 { return negCol} else { return posCol }
+            case let .posNeg(path, pos: posCol, neg: negCol):
+                if datum[keyPath:path] < 0 { return negCol} else { return posCol }
             case let .custom(f): return f(idx, datum)
             case let .flag(path, ifTrue, ifFalse): if datum[keyPath:path] { return ifTrue } else { return ifFalse }
             

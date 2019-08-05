@@ -8,28 +8,32 @@
 
 import SwiftUI
 
-struct BarSlice<D:Identifiable>  {
+struct BarSlice<D>  {
     let label:String
-    let height:(D) -> Double
+    let height:(D) -> Double?
     let guide: GuidePlacement
     let bottom:(D) -> Double
     let width:(D) -> Double
     let dodge:(D) -> Double
     let colour:ChartColour<D>
     
-    var top : (D) -> Double { get {
+    var top : (D) -> Double? { get {
             return { d in
-                self.bottom(d) + self.height(d)
+                if let height = self.height(d) {
+                    return self.bottom(d) + height
+                } else {
+                    return nil
+                }
             }
         }
     }
     
-    func liftUp(_ f:@escaping (D) -> Double) -> BarSlice<D> {
+    func liftUp(_ f:@escaping (D) -> Double?) -> BarSlice<D> {
         return BarSlice(
             label: self.label,
             height: self.height,
             guide: self.guide,
-            bottom: { d in self.bottom(d) + f(d) },
+            bottom: { d in self.bottom(d) + (f(d) ?? 0.0)},
             width: self.width,
             dodge: self.dodge,
             colour: self.colour)
