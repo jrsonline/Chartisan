@@ -30,6 +30,13 @@ extension View {
     var asAnyView : AnyView { get { AnyView(self) }}
 }
 
+extension String {
+    func widthOfString(usingFont font: UIFont) -> CGFloat {
+        let fontAttributes = [NSAttributedString.Key.font: font]
+        let size = self.size(withAttributes: fontAttributes)
+        return size.width
+    }
+}
 
 // Doesn't work, not sure why?
 public extension String.StringInterpolation {

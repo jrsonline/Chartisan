@@ -22,13 +22,13 @@ struct ContentView: View {
     var body : some View {
         Chart(data:testData,
               labels: \.label,
-              coords: Cartesian(axes:[.xAxis : .allLabels, .yAxis : .linearGuide ]),
+              coords: Cartesian(axes:[.xAxis : (.allLabels,"Quarter"), .yAxis : (.linearGuide,"Dollars, million") ]),
               plots:[ BarChart(sizeOrNil: \.y1, annotation: "Capital", colour: .fixed(.yellow) ),
                       BarChart(sizeOrNil: \.y2, annotation: "People", colour: .flag(\.type.isA, ifTrue: .blue, ifFalse: .pink) ),
                       BarChart(sizeOrNil: \.y3, annotation: "Assets", colour: .posNegNil(\.y3, pos: .green, neg:.red)),
  //                     LineChart(height: \.y3, guide: .y2ndAxis,  shape: .circle(/radius: \.capital), annotation: "Overage", colour: .custom({ $0.y3 > 0 ? .red : .green }))
                      ],
-              blendMode: .stack //.fdodge(0.75)
+              blendMode: .fdodge(0.75)
             )
     }
 }

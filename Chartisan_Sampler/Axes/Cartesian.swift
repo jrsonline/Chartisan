@@ -44,7 +44,7 @@ extension UnitSize {
     }
 }
 
-enum CartesianAxisPlacement {
+enum CartesianGuidePlacement {
     case xAxis
     case yAxis
     case x2ndAxis
@@ -71,31 +71,39 @@ extension GuidePlacement {
     }
 }
 
+typealias AxisLabel = String
+
 struct Cartesian : CoordinateSystem {
-    let axes: [CartesianAxisPlacement : CartesianAxisType]
+    let axes: [CartesianGuidePlacement : (CartesianAxisType, AxisLabel)]
+    static let GUIDE_LABEL_MAX_WIDTH : CGFloat = 40.0 // should really be related to font size
+    static let TEXT_LABEL_MAX_WIDTH : CGFloat = 100.0 // should really be related to font size
+
+    static let TEXT_LABEL_HEIGHT : CGFloat = +20.0  // should really be related to font size
+    static let TEXT_LABEL_OFFSET : CGFloat = +8.0
+
     
     /// Figure out the scales given the axes requested, and the plots
 
     func determineGuideScales<D>(data: [D], plots: [ChartPlot<D>], labels: [String?]) ->
-        [GuidePlacement : DeterminedScale]
+        PlacedDeterminedScales
     {
-        var chartGuideDeterminedScale : [GuidePlacement : DeterminedScale] = [:]
+        var chartGuideDeterminedScale : PlacedDeterminedScales = [:]
         
         for cartesianScaleType in axes {
             let placement = cartesianScaleType.key.toGuidePlacement()
             
             switch cartesianScaleType.value {
                 
-                case .guide(let guideScaleType):
+                case let (.guide(guideScaleType), axisLabel):
                     var guideScale = guideScaleType.init()
                     for plot in plots {
                         guideScale.mergeData(data: data, mappings: plot.mappingForGuidePlacement(placement) )
                     }
-                    chartGuideDeterminedScale[placement] = .guideScale(guideScale)
+                    chartGuideDeterminedScale[placement] = (.guideScale(guideScale), axisLabel)
                     
-                case .labels(let labelScaleType):
+                case let (.labels(labelScaleType), axisLabel):
                     let labelScale = labelScaleType.init(labels: labels)
-                    chartGuideDeterminedScale[placement] = .labelScale( labelScale )
+                    chartGuideDeterminedScale[placement] = (.labelScale( labelScale ), axisLabel)
                     
                 default:
                     break
@@ -106,63 +114,101 @@ struct Cartesian : CoordinateSystem {
     }
     
 
-    private func drawAxisPath(size: CGSize, scales: [GuidePlacement:DeterminedScale]) -> AnyView {
+    private func drawAxisPath(size: CGSize, scales: PlacedDeterminedScales) -> AnyView {
         // for now
-        let scale = scales[.yAxis]!.getGuideScale()!
-        
-        let xaxisPosn = scale.interceptPosn().inverse.factor(by: size.height)
+        let yscale = (scales[.yAxis]!).0.getGuideScale()!
+        let xscale = (scales[.xAxis]!).0.getLabelScale()!
+
+        let xaxisPosn = yscale.interceptPosn().inverse.factor(by: size.height)
 
         return Path { path in
             path.addRect(CGRect(x: 0, y: size.height, width: 2, height: -size.height))
             path.addRect(CGRect(x: 0, y: xaxisPosn, width: size.width, height: 2))
             
-            for s in scale.majorSteps() {
+            for s in yscale.majorSteps() {
                 let at = s.position.factor(by: size.height)
                 path.addRect(CGRect(x: -2, y: size.height-at, width: 4, height: 2))
+            }
+            
+            for s in xscale.majorSteps() {
+                let at = s.position.factor(by:size.width)
+                path.addRect(CGRect(x: at, y: xaxisPosn, width: 2, height: 4))
             }
         }
         .fill(Color.primary)
         .asAnyView
     }
     
-    private func drawGuideScale(size: CGSize, scales: [GuidePlacement:DeterminedScale]) -> AnyView {
-        let scale = scales[.yAxis]!.getGuideScale()!
+    private func drawGuideScale(size: CGSize, scales: PlacedDeterminedScales) -> AnyView {
+        let scale = (scales[.yAxis]!).0.getGuideScale()!
+        let label = (scales[.yAxis]!).1
 
-        return ForEach(scale.majorSteps()) { t in
-            Text("\(scale.format(t.value))")
-                .allowsTightening(true)
-                .minimumScaleFactor(0.25)
-                .frame(width: CGFloat(60), alignment: .trailing)
-                .position(CGPoint(x:-35, y: t.position.inverse.factor(by:size.height) ) )
-        }
-        .asAnyView
+        return
 
-    }
-
-    
-    private func drawLabelScale(size: CGSize, scales: [GuidePlacement:DeterminedScale]) -> AnyView {
-        let scale = scales[.xAxis]!.getLabelScale()!
-
-        return ForEach(scale.majorSteps()) { t in
-            Text("\(t.value ?? "" )")
-                .allowsTightening(true)
-                .frame(width: CGFloat(100), height: t.width.factor(by: size.width), alignment: .trailing)
-                .rotationEffect(Angle(degrees: 270))
+            ZStack {
+                ForEach(scale.majorSteps()) { t in
+                    Text("\(scale.format(t.value))")
+                        .allowsTightening(true)
+                        .minimumScaleFactor(0.25)
+                        .frame(width: Cartesian.GUIDE_LABEL_MAX_WIDTH, alignment: .trailing)
+                        .position(CGPoint(x:-Cartesian.GUIDE_LABEL_MAX_WIDTH / 2.0 - Cartesian.TEXT_LABEL_OFFSET, y: t.position.inverse.factor(by:size.height) ) )
+                }
                 
-            .position(CGPoint(
-                x: t.position.clamped(add: 0.5*t.width).factor(by: size.width),
-                y: size.height+55))
-        }
-        .asAnyView
+                Text(label)
+                    .italic()
+                    .rotationEffect(Angle(degrees: 270))
+                    .position(CGPoint(x:-(Cartesian.GUIDE_LABEL_MAX_WIDTH + Cartesian.TEXT_LABEL_HEIGHT), y: UnitValue(0.5).factor(by: size.height)))
+                    .frame(width: CGFloat(size.height))
+    
+            }.asAnyView
+
     }
     
-    func drawAxes(chartSize: CGSize, forDeterminedScales scales: [GuidePlacement:DeterminedScale]) -> AnyView {
+    /// Returns the font size which makes all elements in ts, including the largest, fit in the space of 'forMax' width
+    // argh, needs special SwiftUI thinking here...
+    
+//    private func textWidthStandardizer<Content:View>(_ ts: [String], withFont font: UIFont, maxWidth: CGFloat, @ViewBuilder builder: @escaping (CGFloat) -> Content) -> Content {
+//
+//        let
+//
+//        // first find  the largest bounding box for a reasonable font size
+//        guard let maxStringWidth = ts.map( { $0.widthOfString(usingFont: font) }).max() else { return builder(0.0) }
+//
+//        let ratio = maxWidth / maxStringWidth
+//        if ratio >= 1.0 { return builder(font.si)}
+//
+//    }
+
+    
+    private func drawLabelScale(size: CGSize, scales: PlacedDeterminedScales) -> AnyView {
+        let scale = (scales[.xAxis]!).0.getLabelScale()!
+        let label = (scales[.xAxis]!).1
+
+        return ZStack {
+            ForEach(scale.majorSteps()) { t in
+                Text("\(t.value ?? "" )")
+                    .allowsTightening(true)
+                    .frame(width: Cartesian.TEXT_LABEL_MAX_WIDTH, height: t.width.factor(by: size.width), alignment: .trailing)
+                    .rotationEffect(Angle(degrees: 270))
+                    .position(CGPoint(
+                        x: t.position.clamped(add: 0.5*t.width).factor(by: size.width),
+                        y: size.height + Cartesian.TEXT_LABEL_MAX_WIDTH / 2.0 + Cartesian.TEXT_LABEL_OFFSET))
+                    
+                Text(label)
+                    .italic()
+                    .position(CGPoint(x:UnitValue(0.5).factor(by: size.width),
+                                      y: size.height + Cartesian.TEXT_LABEL_MAX_WIDTH + Cartesian.TEXT_LABEL_HEIGHT))
+            }
+        }.asAnyView
+    }
+    
+    func drawAxes(chartSize: CGSize, forDeterminedScales scales: PlacedDeterminedScales) -> AnyView {
         // Ignore anything non-cartesian
         let cartesianScales = scales.filterWhereKey { $0.isCartesian() }
         return Group {
             drawAxisPath(size: chartSize, scales: cartesianScales )
-            drawGuideScale(size: chartSize, scales: cartesianScales.filterWhereValue { $0.getGuideScale() != nil })
-            drawLabelScale(size: chartSize, scales: cartesianScales.filterWhereValue { $0.getLabelScale() != nil })
+            drawGuideScale(size: chartSize, scales: cartesianScales.filterWhereValue { $0.0.getGuideScale() != nil })
+            drawLabelScale(size: chartSize, scales: cartesianScales.filterWhereValue { $0.0.getLabelScale() != nil })
         }
         .frame(width: chartSize.width,  height: chartSize.height)
         .asAnyView

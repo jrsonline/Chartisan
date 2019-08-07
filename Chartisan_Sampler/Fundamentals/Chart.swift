@@ -23,7 +23,7 @@ struct Chart<D> : View
         size: CGSize = CGSize(width:200, height:200),
         data: [D],
         labels: @escaping (D) -> String? = { d in "\(d)" },
-        coords: CoordinateSystem = Cartesian(axes:[.xAxis : .allLabels, .yAxis : .linearGuide ]),
+        coords: CoordinateSystem = Cartesian(axes:[.xAxis : (.allLabels,""), .yAxis : (.linearGuide,"") ]),
         plots: [ChartPlot<D>],
   //      annotations: [AnyView] = [],
         blendMode: ChartLayerBlendMode
@@ -56,11 +56,11 @@ struct Chart<D> : View
     }
     
     /// Determine the scales to use given the guides requested by each chart, and the axes chosen
-    func determineScales<Content:View>(forPlots plots: [ChartPlot<D>], @ViewBuilder builder: @escaping ([GuidePlacement : DeterminedScale]) -> Content) -> Content {
+    func determineScales<Content:View>(forPlots plots: [ChartPlot<D>], @ViewBuilder builder: @escaping (PlacedDeterminedScales) -> Content) -> Content {
         return builder(self.doDetermineScales(forPlots: plots))
     }
     
-    func doDetermineScales(forPlots plots: [ChartPlot<D>]) -> [GuidePlacement : DeterminedScale] {
+    func doDetermineScales(forPlots plots: [ChartPlot<D>]) -> PlacedDeterminedScales {
         // the coordinate system determines the scales, given the data and the plot guides
         return self.coords.determineGuideScales(data:self.data, plots: plots, labels: data.map( self.labels ))
     }
@@ -87,7 +87,7 @@ struct Chart<D> : View
         return builder(self.doPlotMerge())
     }
     
-    func renderPlot(plot: ChartPlot<D>, scales: [GuidePlacement : DeterminedScale]) -> AnyView {
+    func renderPlot(plot: ChartPlot<D>, scales: PlacedDeterminedScales) -> AnyView {
         return plot.render(withCoords: self.coords, ofSize: self.size, for: self.data, scales: scales)
     }
  

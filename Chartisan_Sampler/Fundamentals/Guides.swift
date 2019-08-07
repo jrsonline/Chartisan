@@ -27,6 +27,8 @@ enum DeterminedScale {
     }
 }
 
+typealias PlacedDeterminedScales = [GuidePlacement : (DeterminedScale,String)]
+
 enum GuidePlacement {
     case xAxis, yAxis, x2ndAxis, y2ndAxis, polarAxis, zAxis // etc
 }

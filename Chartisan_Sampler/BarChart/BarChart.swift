@@ -136,7 +136,7 @@ class BarChart<D> : ChartPlot<D>
                               forScale: scale)
     }
     
-    override func render(withCoords coords: CoordinateSystem, ofSize size: CGSize, for data:[D], scales: [GuidePlacement : DeterminedScale]) -> AnyView {
+    override func render(withCoords coords: CoordinateSystem, ofSize size: CGSize, for data:[D], scales: PlacedDeterminedScales) -> AnyView {
         guard !data.isEmpty else { return EmptyView().asAnyView }
         
         let indexableSlices = IndexedItem.box(slices)
@@ -151,7 +151,7 @@ class BarChart<D> : ChartPlot<D>
                               withItem: d.dt,
                               ofNumber: data.count,
                               fromSize: size,
-                              scalingBy: scales[slice.dt.guide]?.getGuideScale()
+                              scalingBy: scales[slice.dt.guide]?.0.getGuideScale()
                         ).fill(slice.dt.colour.colourFor(idx: d.id, datum: d.dt))
                     }
                 }
