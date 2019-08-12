@@ -22,20 +22,23 @@ struct ContentView: View {
     var body : some View {
         Chart(data:testData,
               labels: \.label,
-              coords: Cartesian(axes:[.xAxis : (.allLabels,"Quarter"), .yAxis : (.linearGuide,"Dollars, million") ]),
-              plots:[ BarChart(sizeOrNil: \.y1, annotation: "Capital", colour: .fixed(.yellow) ),
-                      BarChart(sizeOrNil: \.y2, annotation: "People", colour: .flag(\.type.isA, ifTrue: .blue, ifFalse: .pink) ),
-                      BarChart(sizeOrNil: \.y3, annotation: "Assets", colour: .posNegNil(\.y3, pos: .green, neg:.red)),
+              coords: Cartesian(axes:[.yAxis : (.labelGuide,"Quarter"),
+                                      .xAxis : (.linearGuide,"Dollars, million")  ]),
+              plots:[ BarChart(sizeOrNil: \.y1, onto: .xAxis, annotation: "Capital", colour: .fixed(.yellow) ),
+                      BarChart(sizeOrNil: \.y2, onto: .xAxis,annotation: "People", colour: .flag(\.type.isA, ifTrue: .blue, ifFalse: .pink) ),
+                      BarChart(sizeOrNil: \.y3, onto: .xAxis, annotation: "Assets", colour: .posNegNil(\.y3, pos: .green, neg:.red)),
  //                     LineChart(height: \.y3, guide: .y2ndAxis,  shape: .circle(/radius: \.capital), annotation: "Overage", colour: .custom({ $0.y3 > 0 ? .red : .green }))
                      ],
-              blendMode: .fdodge(0.75)
+              blendMode:  .stack // .fdodge(0.75)
             )
     }
 }
-// 'Measure'' maps data to double value (DV)
+
+// Scale maps data to unit value
 // AestheticScale maps DVs OR enums (?) to aesthetics : shape, colour, ...
-// GuideScale maps DVs to UnitValue(-1...1) for coordinates
-// Coordinate maps unit values to screen
+// Coordinate maps UnitValues to screen coordinates
+// Guide overlays the chart to 'guide' the user's interpretation, so it indicates how the   UnitValues appear on the chart
+
 
 
 

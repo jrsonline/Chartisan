@@ -27,12 +27,12 @@ where Wrapped:Identifiable, Wrapped.ID == Int, Wrapped.IdentifiedValue == Wrappe
     }}
 }
 
-class BarChart<D> : ChartPlot<D>
+class BarChart<D, Coords: CoordinateSystem> : ChartPlot<D, Coords>
 {
-    let slices : [BarSlice<D>]
+    let slices : [BarSlice<D, Coords.AllowedGuidePlacements>]
     let barConfiguration : BarConfiguration
 
-    init( slices: [BarSlice<D>],
+    init( slices: [BarSlice<D, Coords.AllowedGuidePlacements>],
           barConfiguration: BarConfiguration) {
         self.slices = slices
         self.barConfiguration = barConfiguration
@@ -43,7 +43,7 @@ class BarChart<D> : ChartPlot<D>
     
     convenience init(
             size:@escaping (D) -> (Double?),
-            guide: GuidePlacement = .yAxis,
+            onto guide: Coords.AllowedGuidePlacements,// = .yAxis,
             annotation: String = "",
             min:@escaping (D) -> Double = { _ in 0},  // change to 'min'
             colour: ChartColour<D> = .stripe(.green,.blue),
@@ -65,7 +65,7 @@ class BarChart<D> : ChartPlot<D>
 
     
     convenience init( sizeOrNil:KeyPath<D,Double?>,
-                     guide: GuidePlacement = .yAxis,
+                     onto guide: Coords.AllowedGuidePlacements,// = .yAxis,
                      annotation: String = "",
                      min:(KeyPath<D,Double>)? = nil,
                      colour:ChartColour<D> = .stripe(.green,.blue),
@@ -87,7 +87,7 @@ class BarChart<D> : ChartPlot<D>
     }
         
     convenience init( size:KeyPath<D,Double>,
-                     guide: GuidePlacement = .yAxis,
+                     onto guide: Coords.AllowedGuidePlacements,// = .yAxis,
                      annotation: String = "",
                      min:KeyPath<D,Double>? = nil,
                      colour:ChartColour<D> = .stripe(.green,.blue),
@@ -110,15 +110,21 @@ class BarChart<D> : ChartPlot<D>
     }
     
 
-    func bar(coords: CoordinateSystem, slice: BarSlice<D>, withItem item: D, ofNumber n: Int, fromSize plotSize: CGSize, scalingBy gscale: GuideScale?) -> Path {
+    func bar(coords: Coords, slice islice: IndexedItem<BarSlice<D, Coords.AllowedGuidePlacements>>, withItem iitem: IndexedItem<D>, ofNumber n: Int, fromSize plotSize: CGSize, scalingBy gscale: GuideScale?) -> Path {
         guard let scale = gscale else { fatalError("No guide scale provided for bar chart")}
+        
+        let slice = islice.dt
+        let sliceIdx = islice.id
+        let item = iitem.dt
+        let itemIdx = iitem.id
         
         // if the data item is nil, we don't draw anything
         guard let top = slice.top(item) else {
             return coords.drawBox(chartSize: plotSize,
                                   at: UnitPoint.zero,
                                   size: UnitSize.zero,
-                                  forScale: scale)
+                                  forScale: scale,
+                                  on: slice.guide)
         }
         
         let floating = scale[slice.bottom(item)]
@@ -127,47 +133,48 @@ class BarChart<D> : ChartPlot<D>
 
         let barSize = UnitSize( width: UnitValue( (slice.width(item) / n.asDouble) * self.barConfiguration.barWidth),
                              height: barHeight)
+        
+        let barSectionStart = itemIdx.asDouble/n.asDouble
 
-        let origin = UnitPoint( UnitValue( ( slice.dodge(item) * slices.count.asDouble /*+ (0.5 / slices.count.asDouble) */) * barSize.size.width.asDouble),
+        let origin = UnitPoint( UnitValue( ( slice.dodge(item) * slices.count.asDouble) * barSize.size.width.asDouble + barSectionStart ),
                                 floating)
         return coords.drawBox(chartSize: plotSize,
                               at: origin,
                               size: barSize,
-                              forScale: scale)
+                              forScale: scale,
+                              on: slice.guide)
     }
     
-    override func render(withCoords coords: CoordinateSystem, ofSize size: CGSize, for data:[D], scales: PlacedDeterminedScales) -> AnyView {
+    override func render(withCoords coords: Coords, ofSize size: CGSize, for data:[D], scales: PlacedDeterminedScales<Coords.AllowedGuidePlacements>) -> AnyView {
         guard !data.isEmpty else { return EmptyView().asAnyView }
         
         let indexableSlices = IndexedItem.box(slices)
         let indexableData = IndexedItem.box(data)
-        
-        return
-            ZStack {  ForEach(indexableSlices) { slice in
-                HStack(spacing: CGFloat(self.barConfiguration.barGap)) {
-                    ForEach(indexableData) { d in
-                        self.bar(coords: coords,
-                              slice: slice.dt,
-                              withItem: d.dt,
-                              ofNumber: data.count,
-                              fromSize: size,
-                              scalingBy: scales[slice.dt.guide]?.0.getGuideScale()
-                        ).fill(slice.dt.colour.colourFor(idx: d.id, datum: d.dt))
-                    }
+
+        return ZStack {
+            ForEach(indexableSlices) { slice in
+                ForEach(indexableData) { d in
+                    self.bar(coords: coords,
+                             slice: slice,
+                             withItem: d,
+                             ofNumber: data.count,
+                             fromSize: size,
+                             scalingBy: scales[slice.dt.guide]?.0.getGuideScale()
+                    ).fill(slice.dt.colour.colourFor(idx: d.id, datum: d.dt))
                 }
             }
         }.frame(width: size.width,  height: size.height)
-        .asAnyView
+            .asAnyView
     }
     
-    override func mappingForGuidePlacement(_ placement: GuidePlacement) -> [(D) -> Double?] {
+    override func mappingForGuidePlacement(_ placement: Coords.AllowedGuidePlacements) -> [(D) -> Double?] {
         // find slices with indicated placement.
         return self.slices.filter ({ $0.guide == placement }).map( {$0.top })
     }
 
-    override func merge(plots: [ChartPlot<D>], blendMode: ChartLayerBlendMode) -> [ChartPlot<D>] {
+    override func merge(plots: [ChartPlot<D, Coords>], blendMode: ChartLayerBlendMode) -> [ChartPlot<D, Coords>] {
         guard (plots.allSatisfy { $0.mergeKey == self.mergeKey }) else {fatalError("Trying to merge charts with different merge keys")}
-        var allSlices = Array<BarSlice<D>>()
+        var allSlices = Array<BarSlice<D, Coords.AllowedGuidePlacements>>()
         for plot in plots {
             let barChart = plot as! BarChart
             allSlices += barChart.slices.map { $0 }

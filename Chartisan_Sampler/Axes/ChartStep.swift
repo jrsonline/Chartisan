@@ -8,9 +8,9 @@
 
 import SwiftUI
 
-struct ChartStep<T> : Identifiable {
+struct ChartStep : Identifiable {
     let id: Int
-    let value: T
+    let label: String
     let position: UnitValue
     let width: UnitValue // scaled distance from this step to the next, or to '1' if this is the last step
 }

@@ -25,9 +25,16 @@ enum DeterminedScale {
             default: return nil
         }
     }
+    
+    func getMeasurableScale() -> MeasurableScale {
+        switch self {
+            case .labelScale(let labelScale): return labelScale as MeasurableScale
+            case .guideScale(let guideScale): return guideScale as MeasurableScale
+        }
+    }
 }
 
-typealias PlacedDeterminedScales = [GuidePlacement : (DeterminedScale,String)]
+typealias PlacedDeterminedScales<P:Hashable> = [P : (DeterminedScale,String)]
 
 enum GuidePlacement {
     case xAxis, yAxis, x2ndAxis, y2ndAxis, polarAxis, zAxis // etc

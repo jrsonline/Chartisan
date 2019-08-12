@@ -143,8 +143,6 @@
 				C0DE2D6D22F67FB3004B7E78 /* AllLabelsScale.swift */,
 				C00F56BE22EDF53B00CBDBA8 /* ColourScale.swift */,
 				C0DE2D6622F67A14004B7E78 /* LinearScale.swift */,
-				C0DE2D6222F679BD004B7E78 /* Scales-Protocols.swift */,
-				C0DE2D6022F62816004B7E78 /* UnitValue.swift */,
 			);
 			path = Scales;
 			sourceTree = "<group>";
@@ -164,8 +162,10 @@
 				C00F56CA22EDF64400CBDBA8 /* Chart.swift */,
 				C00F56B222EDF40500CBDBA8 /* ChartPlot.swift */,
 				C0DE2D6922F67A6D004B7E78 /* CoordinateSystem.swift */,
+				C0DE2D6222F679BD004B7E78 /* Scales-Protocols.swift */,
 				C0DE2D6B22F67ACC004B7E78 /* Guides.swift */,
 				C00F56CC22EDF66700CBDBA8 /* Statistic.swift */,
+				C0DE2D6022F62816004B7E78 /* UnitValue.swift */,
 			);
 			path = Fundamentals;
 			sourceTree = "<group>";

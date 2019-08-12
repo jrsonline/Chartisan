@@ -75,6 +75,32 @@ struct UnitPoint {
     var point: CGPoint { get { return _point }}
     
     static let zero = UnitPoint(0.0, 0.0)
+    
+    /// Rotates the point right 90 degrees around the origin
+    func rotateRight90() -> UnitPoint {
+        return UnitPoint(Double(self._point.y), Double(-self._point.x))
+//        switch (self._point.x.sign, self._point.y.sign ) {
+//            case (.plus, .plus) : return UnitPoint(Double(self._point.y), Double(-self._point.x)) // (2,3) -> (3,-2)
+//            case (.minus, .plus): return UnitPoint(Double(self._point.y), Double(-self._point.x)) // (3,-2) -> (-2,-3)
+//        case (.minus, .minus): return UnitPoint(Double(self._point.y), Double(-self._point.x)) // (-2,-3) -> (-3,2)
+//        case (.plus, .minus): return UnitPoint(Double(self._point.y), Double(-self._point.x)) // (-3,2) -> (2,3)
+//
+//        }
+    }
+    
+    func rotateLeft90() -> UnitPoint {
+        return UnitPoint(Double(-self._point.y), Double(self._point.x))
+    }
+    
+    /// Ensures the point is in the range (0...1, 0...1) by taking absolute values
+    func forcePositiveQuadrant() -> UnitPoint {
+        return UnitPoint(Double(abs(self._point.x)), Double(abs(self._point.y)) )
+    }
+    
+    /// Inverts the _y_ coordinate only, for iOS devices.
+    func invert() -> UnitPoint {
+        return UnitPoint( self._point.x.asDouble, 1.0 - self._point.y.asDouble )
+    }
 }
 
 /// Like a CGSize but height/width are constrained to 0<=x<=1
@@ -84,11 +110,26 @@ struct UnitSize {
         self._size = CGSize(width:width.value, height:height.value)
     }
     init(width: Double, height: Double) {
-        guard  width>=0 && width<=1 else {fatalError("Width must be 0<=width<=1")}
-        guard  height>=0 && height<=1 else {fatalError("Height must be 0<=height<=1")}
+        guard  width >= -1 && width<=1 else {fatalError("Width must be -1<=width<=1")}
+        guard  height >= -1 && height<=1 else {fatalError("Height must be -1<=height<=1")}
         self._size = CGSize(width:width, height:height)
     }
     var size: CGSize { get { return _size }}
     
     static let zero = UnitSize(width:0.0, height:0.0)
+    
+    func rotateRight90() -> UnitSize {
+        return UnitSize(width: Double(self._size.height), height: Double(self._size.width))
+    }
+    func rotateLeft90() -> UnitSize {
+        return UnitSize(width: Double(self._size.height), height: Double(self._size.width))
+    }
+    
+    func widthMult(_ factor: Double) -> UnitSize {
+        return UnitSize( width: self._size.width.asDouble * factor, height: self._size.height.asDouble )
+    }
+    
+    func heightMult(_ factor: Double) -> UnitSize {
+        return UnitSize( width: self._size.width.asDouble, height: self._size.height.asDouble * factor )
+    }
 }

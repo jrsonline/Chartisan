@@ -8,10 +8,10 @@
 
 import SwiftUI
 
-struct BarSlice<D>  {
+struct BarSlice<D, AllowedGuidePlacement>  {
     let label:String
     let height:(D) -> Double?
-    let guide: GuidePlacement
+    let guide: AllowedGuidePlacement
     let bottom:(D) -> Double
     let width:(D) -> Double
     let dodge:(D) -> Double
@@ -28,7 +28,7 @@ struct BarSlice<D>  {
         }
     }
     
-    func liftUp(_ f:@escaping (D) -> Double?) -> BarSlice<D> {
+    func liftUp(_ f:@escaping (D) -> Double?) -> BarSlice<D, AllowedGuidePlacement> {
         return BarSlice(
             label: self.label,
             height: self.height,
@@ -39,8 +39,8 @@ struct BarSlice<D>  {
             colour: self.colour)
     }
     
-    static func compressEvenly(over slices:[BarSlice<D>], factor: Double) -> [BarSlice<D>] {
-        var compressedSlices : [BarSlice<D>] = []
+    static func compressEvenly(over slices:[BarSlice<D,AllowedGuidePlacement>], factor: Double) -> [BarSlice<D,AllowedGuidePlacement>] {
+        var compressedSlices : [BarSlice<D,AllowedGuidePlacement>] = []
         for (n,slice) in slices.enumerated() {
             compressedSlices += [
                 BarSlice(label: slice.label,
@@ -55,13 +55,13 @@ struct BarSlice<D>  {
         return compressedSlices
     }
     
-    static func blendByLifting(orig xs: [BarSlice<D>], merging x:BarSlice<D>) -> [BarSlice<D>] {
+    static func blendByLifting(orig xs: [BarSlice<D,AllowedGuidePlacement>], merging x:BarSlice<D,AllowedGuidePlacement>) -> [BarSlice<D,AllowedGuidePlacement>] {
         guard let lastSlice = xs.last else { return [x] }
         
         return xs + [ x.liftUp(lastSlice.top ) ]
     }
     
-    static func blend(blendMode: ChartLayerBlendMode, slices: [BarSlice<D>]) -> [BarSlice<D>] {
+    static func blend(blendMode: ChartLayerBlendMode, slices: [BarSlice<D,AllowedGuidePlacement>]) -> [BarSlice<D,AllowedGuidePlacement>] {
         switch blendMode {
         case .stack:
             return slices.reduce([]) { xs, x in self.blendByLifting(orig: xs, merging: x) }

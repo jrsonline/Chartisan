@@ -9,13 +9,13 @@
 import SwiftUI
 
 
-struct Chart<D> : View
+struct Chart<D, Coords: CoordinateSystem> : View
 {
     let size: CGSize
     let data: [D]
     let labels: (D) -> String?
-    let coords: CoordinateSystem
-    let plots: [ChartPlot<D>]
+    let coords: Coords
+    let plots: [ChartPlot<D, Coords>]
     let annotations: [AnyView] = []
     let blendMode: ChartLayerBlendMode
     
@@ -23,8 +23,8 @@ struct Chart<D> : View
         size: CGSize = CGSize(width:200, height:200),
         data: [D],
         labels: @escaping (D) -> String? = { d in "\(d)" },
-        coords: CoordinateSystem = Cartesian(axes:[.xAxis : (.allLabels,""), .yAxis : (.linearGuide,"") ]),
-        plots: [ChartPlot<D>],
+        coords: Coords, //= Cartesian(axes:[.xAxis : (.labelGuide,""), .yAxis : (.linearGuide,"") ]),
+        plots: [ChartPlot<D, Coords>],
   //      annotations: [AnyView] = [],
         blendMode: ChartLayerBlendMode
     ) {
@@ -41,8 +41,8 @@ struct Chart<D> : View
         size: CGSize = CGSize(width:200, height:200),
         data: [D],
         labels: KeyPath<D,String>,
-        coords: CoordinateSystem,
-        plots: [ChartPlot<D>],
+        coords: Coords,
+        plots: [ChartPlot<D, Coords>],
   //      annotations: [AnyView] = [],
         blendMode: ChartLayerBlendMode
     ) {
@@ -56,18 +56,18 @@ struct Chart<D> : View
     }
     
     /// Determine the scales to use given the guides requested by each chart, and the axes chosen
-    func determineScales<Content:View>(forPlots plots: [ChartPlot<D>], @ViewBuilder builder: @escaping (PlacedDeterminedScales) -> Content) -> Content {
+    func determineScales<Content:View>(forPlots plots: [ChartPlot<D, Coords>], @ViewBuilder builder: @escaping (PlacedDeterminedScales<Coords.AllowedGuidePlacements>) -> Content) -> Content {
         return builder(self.doDetermineScales(forPlots: plots))
     }
     
-    func doDetermineScales(forPlots plots: [ChartPlot<D>]) -> PlacedDeterminedScales {
+    func doDetermineScales(forPlots plots: [ChartPlot<D, Coords>]) -> PlacedDeterminedScales<Coords.AllowedGuidePlacements> {
         // the coordinate system determines the scales, given the data and the plot guides
         return self.coords.determineGuideScales(data:self.data, plots: plots, labels: data.map( self.labels ))
     }
     
     /// Merge and reprocess similar  plots in order to blend several plots into potentially different plots
-    func doPlotMerge() -> [ChartPlot<D>] {
-        var blendedPlots : [ChartPlot<D>] = []
+    func doPlotMerge() -> [ChartPlot<D, Coords>] {
+        var blendedPlots : [ChartPlot<D, Coords>] = []
         
         // Merge all similar charts into a single  chart
         let pairedWithMergeKey = zip(self.plots, self.plots.map { $0.mergeKey ?? "None" })
@@ -83,11 +83,11 @@ struct Chart<D> : View
         return blendedPlots
     }
     
-    func plotMerge<Content:View>(@ViewBuilder builder: @escaping ([ChartPlot<D>]) -> Content) -> Content {
+    func plotMerge<Content:View>(@ViewBuilder builder: @escaping ([ChartPlot<D, Coords>]) -> Content) -> Content {
         return builder(self.doPlotMerge())
     }
     
-    func renderPlot(plot: ChartPlot<D>, scales: PlacedDeterminedScales) -> AnyView {
+    func renderPlot(plot: ChartPlot<D, Coords>, scales: PlacedDeterminedScales<Coords.AllowedGuidePlacements>) -> AnyView {
         return plot.render(withCoords: self.coords, ofSize: self.size, for: self.data, scales: scales)
     }
  
