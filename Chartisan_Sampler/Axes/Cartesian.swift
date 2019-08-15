@@ -76,7 +76,7 @@ typealias AxisLabel = String
 struct Cartesian : CoordinateSystem {
     let axes: [CartesianGuidePlacement : (CartesianAxisType, AxisLabel)]
     static let GUIDE_LABEL_MAX_WIDTH : CGFloat = 40.0 // should really be related to font size
-    static let TEXT_LABEL_MAX_WIDTH : CGFloat = 100.0 // should really be related to font size
+    static let TEXT_LABEL_MAX_WIDTH : CGFloat = 80.0 // should really be related to font size
 
     static let TEXT_LABEL_HEIGHT : CGFloat = +20.0  // should really be related to font size
     static let TEXT_LABEL_OFFSET : CGFloat = +8.0
@@ -142,19 +142,24 @@ struct Cartesian : CoordinateSystem {
         .asAnyView
     }
     
-    private func drawGuideScale(size: CGSize, scales: PlacedDeterminedScales<CartesianGuidePlacement>) -> AnyView {
+    private func drawGuideScale(size: CGSize, scales: PlacedDeterminedScales<CartesianGuidePlacement>, labelFont: UIFont) -> AnyView {
         assert(scales.count == 1, "Currently must have just one guide scale for a bar graph, sorry!")
         let guideAxis = Array(scales.keys)[0]
 
         let scale = (scales[guideAxis]!).0.getGuideScale()!
         let mainLabel = (scales[guideAxis]!).1
+        
+        guard let firstStep = scale.majorSteps().first else {return EmptyView().asAnyView}
+        
 
         switch guideAxis {
             
         case .xAxis:
-            return putLabelsOnXAxis(scale: scale, centredLabels: false, textWidth: Cartesian.GUIDE_LABEL_MAX_WIDTH, size: size, mainLabel: mainLabel)
+            let maxTextWidth = firstStep.width.factor(by: size.width)
+            return putLabelsOnXAxis(scale: scale, centredLabels: false, maxTextWidth: maxTextWidth, maxRotatedTextWidth: Cartesian.TEXT_LABEL_MAX_WIDTH, size: size, mainLabel: mainLabel, labelFont: labelFont)
         case .yAxis:
-            return putLabelsOnYAxis(scale: scale, centredLabels: false, textWidth: Cartesian.GUIDE_LABEL_MAX_WIDTH, size: size, mainLabel: mainLabel)
+            let maxTextWidth = firstStep.width.factor(by: size.height)
+            return putLabelsOnYAxis(scale: scale, centredLabels: false, maxTextWidth: Cartesian.TEXT_LABEL_MAX_WIDTH, maxRotatedTextWidth: maxTextWidth, size: size, reverse: false, mainLabel: mainLabel, labelFont: labelFont)
         case .x2ndAxis:
             fatalError("Currently unsuppported, sorry!")
         case .y2ndAxis:
@@ -165,31 +170,39 @@ struct Cartesian : CoordinateSystem {
     /// Returns the font size which makes all elements in ts, including the largest, fit in the space of 'forMax' width
     // argh, needs special SwiftUI thinking here...
     
-//    private func textWidthStandardizer<Content:View>(_ ts: [String], withFont font: UIFont, maxWidth: CGFloat, @ViewBuilder builder: @escaping (CGFloat) -> Content) -> Content {
-//
-//        let
-//
-//        // first find  the largest bounding box for a reasonable font size
-//        guard let maxStringWidth = ts.map( { $0.widthOfString(usingFont: font) }).max() else { return builder(0.0) }
-//
-//        let ratio = maxWidth / maxStringWidth
-//        if ratio >= 1.0 { return builder(font.si)}
-//
-//    }
+    private func textWidthStandardizer<Content:View>(_ ts: [String], withFont font: UIFont, maxWidth: CGFloat, maxRotatedWidth: CGFloat, @ViewBuilder builder: @escaping (CGFloat,Bool) -> Content) -> Content {
+
+        // first find  the largest bounding box for a reasonable font size
+        guard let maxStringWidth = ts.map( { $0.widthOfString(usingFont: font) }).max() else { return builder(0.0, false) }
+
+        let ratio = maxWidth / maxStringWidth
+        let rotatedRatio = maxRotatedWidth / maxStringWidth
+        switch (ratio, rotatedRatio) {
+            case (0..<0.7, 1.0...) : return builder(floor(font.pointSize), true)
+            case (0..<0.7, 0.7..<1.0) : return builder(floor(font.pointSize) * rotatedRatio, true)
+            case (0.7..<1.0,_): return builder(floor(font.pointSize * ratio), false)
+            default : return builder(font.pointSize,false)
+        }
+    }
 
     
-    private func drawLabelScale(size: CGSize, scales: PlacedDeterminedScales<CartesianGuidePlacement>) -> AnyView {
+    private func drawLabelScale(size: CGSize, scales: PlacedDeterminedScales<CartesianGuidePlacement>, labelFont: UIFont) -> AnyView {
         assert(scales.count == 1)
+
         let labelAxis = Array(scales.keys)[0]
         let scale = (scales[labelAxis]!).0.getLabelScale()!
         let mainLabel = (scales[labelAxis]!).1
         
+        guard let firstStep = scale.majorSteps().first else {return EmptyView().asAnyView}
+        
         switch labelAxis {
             
         case .xAxis:
-            return putLabelsOnXAxis(scale: scale, centredLabels: true, textWidth: Cartesian.TEXT_LABEL_MAX_WIDTH, size: size, mainLabel: mainLabel)
+            let maxTextWidth = firstStep.width.factor(by: size.width)
+            return putLabelsOnXAxis(scale: scale, centredLabels: true, maxTextWidth: maxTextWidth, maxRotatedTextWidth: Cartesian.TEXT_LABEL_MAX_WIDTH, size: size, mainLabel: mainLabel, labelFont: labelFont)
         case .yAxis:
-            return putLabelsOnYAxis(scale: scale, centredLabels: true, textWidth: Cartesian.TEXT_LABEL_MAX_WIDTH, size: size, mainLabel: mainLabel)
+            let maxTextWidth = firstStep.width.factor(by: size.height)
+            return putLabelsOnYAxis(scale: scale, centredLabels: true, maxTextWidth: Cartesian.TEXT_LABEL_MAX_WIDTH, maxRotatedTextWidth: maxTextWidth, size: size, reverse: true, mainLabel: mainLabel, labelFont: labelFont)
         case .x2ndAxis:
             fatalError("Currently unsuppported, sorry!")
         case .y2ndAxis:
@@ -197,45 +210,46 @@ struct Cartesian : CoordinateSystem {
         }
     }
     
-    func putLabelsOnXAxis(scale: MeasurableScale, centredLabels: Bool, textWidth: CGFloat, size: CGSize, mainLabel: String) -> AnyView {
+    func putLabelsOnXAxis(scale: MeasurableScale, centredLabels: Bool, maxTextWidth: CGFloat, maxRotatedTextWidth: CGFloat, size: CGSize, mainLabel: String, labelFont: UIFont) -> AnyView {
         let labelOffset = centredLabels ? 0.5 : 0.0
-        guard let firstStep = scale.majorSteps().first else {return EmptyView().asAnyView}
-        let rotatedLabels = (firstStep.width.factor(by: size.width) < textWidth)
-        let rotationAngle = rotatedLabels ? 270.0 : 0.0
-        
-        return ZStack {
-            ForEach(scale.majorSteps() ) { t in
-                Text("\(t.label)")
+
+        return self.textWidthStandardizer(scale.majorSteps().map{$0.label}, withFont: labelFont, maxWidth: maxTextWidth, maxRotatedWidth: maxRotatedTextWidth) { fontSize, rotated in
+            ZStack {
+                ForEach(scale.majorSteps() ) { t in
+                    Text("\(t.label)")
+                        .allowsTightening(true)
+                        .font(labelFont.toSwiftUI(size: fontSize))
+                        .frame(
+                            width: rotated ? maxRotatedTextWidth : maxTextWidth, alignment: rotated ? .trailing: .center)
+                        .rotationEffect(Angle(degrees: rotated ? 270.0 : 0.0))
+                        .position(
+                            x: t.position.clamped(add: labelOffset*t.width).factor(by: size.width),
+                            y: size.height + (rotated ? maxRotatedTextWidth / 2.0 : Cartesian.TEXT_LABEL_OFFSET) +  Cartesian.TEXT_LABEL_OFFSET)
+                }
+                
+                Text(mainLabel)
+                    .italic()
                     .allowsTightening(true)
-                    .frame(
-                        width: textWidth, alignment: rotatedLabels ? .trailing: .center)
-                    .rotationEffect(Angle(degrees: rotationAngle))
+                    .frame(width: size.width, alignment: .center)
                     .position(
-                        x: t.position.clamped(add: labelOffset*t.width).factor(by: size.width),
-                        y: size.height + (rotatedLabels ? textWidth / 2.0 : Cartesian.TEXT_LABEL_OFFSET) +  Cartesian.TEXT_LABEL_OFFSET)
+                        x: UnitValue(0.5).factor(by: size.width),
+                        y: size.height + (rotated ? maxRotatedTextWidth : Cartesian.TEXT_LABEL_HEIGHT) + Cartesian.TEXT_LABEL_HEIGHT)
             }
-            Text(mainLabel)
-                .italic()
-                .allowsTightening(true)
-                .frame(width: size.width, alignment: .center)
-                .position(
-                    x: UnitValue(0.5).factor(by: size.width),
-                    y: size.height + textWidth)
         }.asAnyView
     }
     
-    func putLabelsOnYAxis(scale: MeasurableScale, centredLabels: Bool, textWidth: CGFloat, size: CGSize, mainLabel: String) -> AnyView {
+    func putLabelsOnYAxis(scale: MeasurableScale, centredLabels: Bool, maxTextWidth: CGFloat, maxRotatedTextWidth: CGFloat, size: CGSize, reverse: Bool, mainLabel: String, labelFont: UIFont) -> AnyView {
         let labelOffset = centredLabels ? 0.5 : 0.0
-        let topMainLabel = textWidth > Cartesian.YAXIS_MAINLABEL_MAX_WIDTH
+        let topMainLabel = maxTextWidth > Cartesian.YAXIS_MAINLABEL_MAX_WIDTH
 
         let mainLabelView : AnyView
         if topMainLabel {
             mainLabelView = Text(mainLabel)
                 .italic()
                 .allowsTightening(true)
-                .frame(width: textWidth, alignment: .trailing)
+                .frame(width: maxTextWidth, alignment: .trailing)
                 .position(
-                    x: -(textWidth / 2.0 + Cartesian.TEXT_LABEL_OFFSET),
+                    x: -(maxTextWidth / 2.0 + Cartesian.TEXT_LABEL_OFFSET),
                     y: -Cartesian.TEXT_LABEL_HEIGHT)
                 .asAnyView
         } else {
@@ -245,37 +259,45 @@ struct Cartesian : CoordinateSystem {
                 .frame(width: size.height, alignment: .center)
                 .rotationEffect(Angle(degrees:270))
                 .position(
-                    x: -textWidth - Cartesian.TEXT_LABEL_HEIGHT/2.0,
+                    x: -maxTextWidth - Cartesian.TEXT_LABEL_HEIGHT/2.0,
                     y: UnitValue(0.5).factor(by: size.height))
                 .asAnyView
         }
         
+        let invert: (UnitValue) -> UnitValue = { v in
+            if reverse { return v } else { return v.inverse }
+        }
+                
         return ZStack {
-            ForEach(scale.majorSteps() ) { t in
-                Text("\(t.label)")
-                    .allowsTightening(true)
-                    .frame(
-                        width: textWidth,
-                        height: t.width.factor(by: size.height), alignment: .trailing)
-                    .position(
-                        x: -(textWidth / 2.0 + Cartesian.TEXT_LABEL_OFFSET),
-                        y: t.position.clamped(add: labelOffset*t.width).inverse.factor(by: size.height))
+            self.textWidthStandardizer(scale.majorSteps().map{$0.label}, withFont: labelFont, maxWidth: maxTextWidth, maxRotatedWidth: maxRotatedTextWidth) { fontSize, rotated in
+                ForEach(scale.majorSteps() ) { t in
+                    Text("\(t.label)")
+                        .allowsTightening(true)
+                        .font(labelFont.toSwiftUI(size: fontSize))
+                        .frame(
+                            width: rotated ? maxRotatedTextWidth : maxTextWidth,
+                            height: t.width.factor(by: size.height), alignment: .trailing)
+                        .rotationEffect(Angle(degrees:rotated ? 270.0 : 0.0))
+                        .position(
+                            x: -(maxTextWidth / 2.0 + Cartesian.TEXT_LABEL_OFFSET),
+                            y: invert( t.position.clamped(add: labelOffset*t.width)).factor(by: size.height))
+                }
             }
             mainLabelView
         }.asAnyView
     }
     
-    func drawAxes(chartSize: CGSize, forDeterminedScales scales: PlacedDeterminedScales<CartesianGuidePlacement>) -> AnyView {
+    func drawAxes(chartSize: CGSize, forDeterminedScales scales: PlacedDeterminedScales<CartesianGuidePlacement>, style: ChartStyle) -> AnyView {
         // For a barchart, we need at least one (numeric) guide and exactly one label
         let guideScales = scales.filterWhereValue { $0.0.getGuideScale() != nil }
         let labelScales = scales.filterWhereValue { $0.0.getLabelScale() != nil }
         
         guard guideScales.count >= 1 && labelScales.count == 1 else { fatalError("Barchart needs at least one (numeric) guide and exactly one label scale") }
-        
+                
         return Group {
             drawAxisPath(size: chartSize, scales: scales )
-            drawGuideScale(size: chartSize, scales: guideScales)
-            drawLabelScale(size: chartSize, scales: labelScales)
+            drawGuideScale(size: chartSize, scales: guideScales, labelFont: style.labelFont)
+            drawLabelScale(size: chartSize, scales: labelScales, labelFont: style.labelFont)
         }
         .frame(width: chartSize.width,  height: chartSize.height)
         .asAnyView

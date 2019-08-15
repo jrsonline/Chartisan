@@ -85,3 +85,27 @@ extension Array {
     }
 }
 
+
+extension Font {
+    func getUIFont() -> UIFont {
+        switch self {
+            case .body: return UIFont.preferredFont(forTextStyle: .body)
+            case .title: return UIFont.preferredFont(forTextStyle: .title1)
+            case .largeTitle: return UIFont.preferredFont(forTextStyle: .largeTitle)
+            case .headline: return UIFont.preferredFont(forTextStyle: .headline)
+            case .subheadline: return UIFont.preferredFont(forTextStyle: .subheadline)
+            case .callout: return UIFont.preferredFont(forTextStyle: .callout)
+            case .caption: return UIFont.preferredFont(forTextStyle: .caption1)
+            case .footnote: return UIFont.preferredFont(forTextStyle: .footnote)
+            default: return UIFont.preferredFont(forTextStyle: .body)
+        }
+ 
+    }
+}
+
+extension UIFont {
+    func toSwiftUI(size:CGFloat) -> Font {
+        let name = String(self.fontName.dropFirst())  // leading . character ?
+        return Font.custom(name, size: size)
+    }
+}

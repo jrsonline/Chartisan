@@ -3,4 +3,69 @@
    uuid = "9F2BDF89-D54D-4186-AC86-A9D02A5A93DC"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B368AE95-27BE-438C-AE7F-8BE753D584D4"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Chartisan_Sampler/Axes/Cartesian.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "180"
+            endingLineNumber = "180"
+            landmarkName = "textWidthStandardizer(_:withFont:maxWidth:maxRotatedWidth:builder:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "B368AE95-27BE-438C-AE7F-8BE753D584D4 - bcb1d1b8a8affb35"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Chartisan_Sampler.Cartesian.(textWidthStandardizer in _30A3FC2EE081BF3AAF56F97277A0E58F)&lt;A where A: SwiftUI.View&gt;(_: Swift.Array&lt;Swift.String&gt;, withFont: __C.UIFont, maxWidth: CoreGraphics.CGFloat, maxRotatedWidth: CoreGraphics.CGFloat, builder: (CoreGraphics.CGFloat, Swift.Bool) -&gt; A) -&gt; A"
+                  moduleName = "Chartisan_Sampler"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/redpanda/Dropbox/Code%20Projects%20Dropbox/Chartisan_Sampler/Chartisan_Sampler/Axes/Cartesian.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "180"
+                  endingLineNumber = "180"
+                  offsetFromSymbolStart = "823">
+               </Location>
+               <Location
+                  uuid = "B368AE95-27BE-438C-AE7F-8BE753D584D4 - bcb1d1b8a8affb35"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Chartisan_Sampler.Cartesian.(textWidthStandardizer in _30A3FC2EE081BF3AAF56F97277A0E58F)&lt;A where A: SwiftUI.View&gt;(_: Swift.Array&lt;Swift.String&gt;, withFont: __C.UIFont, maxWidth: CoreGraphics.CGFloat, maxRotatedWidth: CoreGraphics.CGFloat, builder: (CoreGraphics.CGFloat, Swift.Bool) -&gt; A) -&gt; A"
+                  moduleName = "Chartisan_Sampler"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/redpanda/Dropbox/Code%20Projects%20Dropbox/Chartisan_Sampler/Chartisan_Sampler/Axes/Cartesian.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "180"
+                  endingLineNumber = "180"
+                  offsetFromSymbolStart = "2630">
+               </Location>
+               <Location
+                  uuid = "B368AE95-27BE-438C-AE7F-8BE753D584D4 - bcb1d1b8a8affb35"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Chartisan_Sampler.Cartesian.(textWidthStandardizer in _30A3FC2EE081BF3AAF56F97277A0E58F)&lt;A where A: SwiftUI.View&gt;(_: Swift.Array&lt;Swift.String&gt;, withFont: __C.UIFont, maxWidth: CoreGraphics.CGFloat, maxRotatedWidth: CoreGraphics.CGFloat, builder: (CoreGraphics.CGFloat, Swift.Bool) -&gt; A) -&gt; A"
+                  moduleName = "Chartisan_Sampler"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/redpanda/Dropbox/Code%20Projects%20Dropbox/Chartisan_Sampler/Chartisan_Sampler/Axes/Cartesian.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "180"
+                  endingLineNumber = "180"
+                  offsetFromSymbolStart = "4573">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

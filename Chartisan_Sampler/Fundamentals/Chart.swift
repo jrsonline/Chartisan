@@ -18,7 +18,9 @@ struct Chart<D, Coords: CoordinateSystem> : View
     let plots: [ChartPlot<D, Coords>]
     let annotations: [AnyView] = []
     let blendMode: ChartLayerBlendMode
+    let style: ChartStyle
     
+
     init(
         size: CGSize = CGSize(width:200, height:200),
         data: [D],
@@ -26,7 +28,9 @@ struct Chart<D, Coords: CoordinateSystem> : View
         coords: Coords, //= Cartesian(axes:[.xAxis : (.labelGuide,""), .yAxis : (.linearGuide,"") ]),
         plots: [ChartPlot<D, Coords>],
   //      annotations: [AnyView] = [],
-        blendMode: ChartLayerBlendMode
+        blendMode: ChartLayerBlendMode,
+        style: ChartStyle = ChartStyle()
+        
     ) {
         self.size = size
         self.data = data
@@ -35,6 +39,7 @@ struct Chart<D, Coords: CoordinateSystem> : View
         self.plots = plots
  //       self.annotations = annotations
         self.blendMode = blendMode
+        self.style = style
     }
     
     init(
@@ -44,7 +49,8 @@ struct Chart<D, Coords: CoordinateSystem> : View
         coords: Coords,
         plots: [ChartPlot<D, Coords>],
   //      annotations: [AnyView] = [],
-        blendMode: ChartLayerBlendMode
+        blendMode: ChartLayerBlendMode,
+        style: ChartStyle = ChartStyle()
     ) {
         self.size = size
         self.data = data
@@ -53,6 +59,7 @@ struct Chart<D, Coords: CoordinateSystem> : View
         self.plots = plots
   //      self.annotations = annotations
         self.blendMode = blendMode
+        self.style = style
     }
     
     /// Determine the scales to use given the guides requested by each chart, and the axes chosen
@@ -88,7 +95,7 @@ struct Chart<D, Coords: CoordinateSystem> : View
     }
     
     func renderPlot(plot: ChartPlot<D, Coords>, scales: PlacedDeterminedScales<Coords.AllowedGuidePlacements>) -> AnyView {
-        return plot.render(withCoords: self.coords, ofSize: self.size, for: self.data, scales: scales)
+        return plot.render(withCoords: self.coords, ofSize: self.size, for: self.data, scales: scales, style: self.style)
     }
  
     var body: some View {
@@ -98,7 +105,7 @@ struct Chart<D, Coords: CoordinateSystem> : View
                     ForEach(mergedPlots) { plot in
                         self.renderPlot(plot: plot, scales: scales)
                     }
-                    self.coords.drawAxes(chartSize: self.size, forDeterminedScales: scales)
+                    self.coords.drawAxes(chartSize: self.size, forDeterminedScales: scales, style: self.style)
                 }
             }
         }

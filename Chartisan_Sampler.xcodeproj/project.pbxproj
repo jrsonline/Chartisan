@@ -28,6 +28,7 @@
 		C00F56CB22EDF64400CBDBA8 /* Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00F56CA22EDF64400CBDBA8 /* Chart.swift */; };
 		C00F56CD22EDF66700CBDBA8 /* Statistic.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00F56CC22EDF66700CBDBA8 /* Statistic.swift */; };
 		C00F56D322EDF76800CBDBA8 /* DoubleScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00F56D222EDF76800CBDBA8 /* DoubleScale.swift */; };
+		C070930C230227DE006BF77F /* ChartStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C070930B230227DE006BF77F /* ChartStyle.swift */; };
 		C0DE2D5F22F121D9004B7E78 /* Cartesian.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE2D5E22F121D9004B7E78 /* Cartesian.swift */; };
 		C0DE2D6122F62816004B7E78 /* UnitValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE2D6022F62816004B7E78 /* UnitValue.swift */; };
 		C0DE2D6322F679BD004B7E78 /* Scales-Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE2D6222F679BD004B7E78 /* Scales-Protocols.swift */; };
@@ -62,6 +63,7 @@
 		C00F56CA22EDF64400CBDBA8 /* Chart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chart.swift; sourceTree = "<group>"; };
 		C00F56CC22EDF66700CBDBA8 /* Statistic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statistic.swift; sourceTree = "<group>"; };
 		C00F56D222EDF76800CBDBA8 /* DoubleScale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleScale.swift; sourceTree = "<group>"; };
+		C070930B230227DE006BF77F /* ChartStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartStyle.swift; sourceTree = "<group>"; };
 		C0DE2D5E22F121D9004B7E78 /* Cartesian.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cartesian.swift; sourceTree = "<group>"; };
 		C0DE2D6022F62816004B7E78 /* UnitValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitValue.swift; sourceTree = "<group>"; };
 		C0DE2D6222F679BD004B7E78 /* Scales-Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Scales-Protocols.swift"; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 				C0DE2D6B22F67ACC004B7E78 /* Guides.swift */,
 				C00F56CC22EDF66700CBDBA8 /* Statistic.swift */,
 				C0DE2D6022F62816004B7E78 /* UnitValue.swift */,
+				C070930B230227DE006BF77F /* ChartStyle.swift */,
 			);
 			path = Fundamentals;
 			sourceTree = "<group>";
@@ -275,6 +278,7 @@
 				C00F56C522EDF5E800CBDBA8 /* BarChart.swift in Sources */,
 				C0092E8D22E5073F00A6A7BD /* ContentView.swift in Sources */,
 				C0DE2D6722F67A14004B7E78 /* LinearScale.swift in Sources */,
+				C070930C230227DE006BF77F /* ChartStyle.swift in Sources */,
 				C00F56B322EDF40500CBDBA8 /* ChartPlot.swift in Sources */,
 				C00F56B522EDF43200CBDBA8 /* ChartAxis.swift in Sources */,
 				C0DE2D6522F679F2004B7E78 /* ChartStep.swift in Sources */,

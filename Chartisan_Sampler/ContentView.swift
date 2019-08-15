@@ -11,11 +11,11 @@ enum DType : CaseIterable  {
 }
 
 struct TestData { let y1,y2,y3: Double?; let type: DType; let label: String; let id: Int }
-let testData : [TestData] = [ TestData(y1: nil, y2: 2,  y3: 4, type: .b, label:"Q1 2018", id:1),
-                              TestData(y1: 2, y2: 6,  y3: 1, type: .a, label:"Q2 2018", id:2),
-                              TestData(y1:  5, y2: 3, y3: 2, type: .b, label:"Q3 2018", id:3),
-                              TestData(y1:  1, y2: 5, y3: nil, type: .a, label:"Q4 2018", id:4),
-                              TestData(y1: 2, y2: 3, y3: 6, type: .a, label:"Q1 2019", id:5)]
+let testData : [TestData] = [ TestData(y1: nil, y2: 2,  y3: 4, type: .b, label:"Q1", id:1),
+                              TestData(y1: 2, y2: 6,  y3: 1, type: .a, label:"Q2", id:2),
+                              TestData(y1:  5, y2: 3, y3: 2, type: .b, label:"Q3", id:3),
+                              TestData(y1:  1, y2: 5, y3: nil, type: .a, label:"Q4", id:4),
+                              TestData(y1: 2, y2: 3, y3: 6, type: .a, label:"Q1", id:5)]
 
 struct ContentView: View {
     
@@ -29,7 +29,7 @@ struct ContentView: View {
                       BarChart(sizeOrNil: \.y3, onto: .xAxis, annotation: "Assets", colour: .posNegNil(\.y3, pos: .green, neg:.red)),
  //                     LineChart(height: \.y3, guide: .y2ndAxis,  shape: .circle(/radius: \.capital), annotation: "Overage", colour: .custom({ $0.y3 > 0 ? .red : .green }))
                      ],
-              blendMode:  .stack // .fdodge(0.75)
+              blendMode:  .stack // .fdodge(0.75),
             )
     }
 }

@@ -145,7 +145,7 @@ class BarChart<D, Coords: CoordinateSystem> : ChartPlot<D, Coords>
                               on: slice.guide)
     }
     
-    override func render(withCoords coords: Coords, ofSize size: CGSize, for data:[D], scales: PlacedDeterminedScales<Coords.AllowedGuidePlacements>) -> AnyView {
+    override func render(withCoords coords: Coords, ofSize size: CGSize, for data:[D], scales: PlacedDeterminedScales<Coords.AllowedGuidePlacements>, style: ChartStyle) -> AnyView {
         guard !data.isEmpty else { return EmptyView().asAnyView }
         
         let indexableSlices = IndexedItem.box(slices)

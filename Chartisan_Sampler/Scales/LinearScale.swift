@@ -9,7 +9,6 @@
 import Foundation
 
 struct LinearScale : GuideScale {
-
     var max: Double? = nil
     var min: Double? = nil
     var chartSteps: [ChartStep] = []
@@ -60,7 +59,7 @@ struct LinearScale : GuideScale {
                 if steps <= 5 {
                     let chartSteps : [ChartStep] = (0...Int(steps)).map { idx in
                         ChartStep(id: idx,
-                                     label: dformat( mmin+(mmax-mmin)*(idx.asDouble/steps) ),
+                                     label: self.format(mmin+(mmax-mmin)*(idx.asDouble/steps )),
                                      position:UnitValue(idx.asDouble/steps),
                                      width: UnitValue(1.0/steps))
                     }
@@ -73,7 +72,7 @@ struct LinearScale : GuideScale {
         // Can't create a good scale
         let chartSteps: [ChartStep] = (0...10).map  { idx in
             ChartStep(id: idx,
-                         label: dformat( min+(max-min)*(idx.asDouble/10.0) ),
+                         label: self.format( min+(max-min)*(idx.asDouble/10.0)),
                          position:UnitValue(idx.asDouble/10.0),
                          width: UnitValue(1.0/10.0))
         }
@@ -101,9 +100,4 @@ struct LinearScale : GuideScale {
         guard let max = self.max, let min = self.min else { fatalError("Scale not properly determined: no min/max")}
         return UnitValue( (value-min)/(max-min) )
     }
-    // 0 -> 0
-    // min -> -1  IF smaller than 0, else min
-    // max -> +1  IF larger than 0, else max
-    
-    
 }

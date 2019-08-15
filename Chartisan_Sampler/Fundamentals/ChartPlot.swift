@@ -15,7 +15,7 @@ class ChartPlot<D, Coords: CoordinateSystem> : Identifiable
 {
     let id: UUID = UUID()
     
-    func render(withCoords coords: Coords, ofSize size: CGSize, for data:[D], scales: PlacedDeterminedScales<Coords.AllowedGuidePlacements>) -> AnyView {
+    func render(withCoords coords: Coords, ofSize size: CGSize, for data:[D], scales: PlacedDeterminedScales<Coords.AllowedGuidePlacements>, style: ChartStyle) -> AnyView {
         return EmptyView().asAnyView
     }
     
