@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 /// Value used to indicate that a number is between -1 and 1
-struct UnitValue {
+public struct UnitValue {
     static let zero = UnitValue(0)
     static let one = UnitValue(1)
     static let minusOne = UnitValue(-1)
@@ -62,7 +62,7 @@ struct UnitValue {
     }
 }
 /// Like a CGPoint but the points are constrained to -1<=x<=1
-struct UnitPoint {
+public struct UnitPoint {
     private var _point : CGPoint
     init(_ x: UnitValue,_ y: UnitValue) {
         self._point = CGPoint(x:x.value, y:y.value)
@@ -104,7 +104,7 @@ struct UnitPoint {
 }
 
 /// Like a CGSize but height/width are constrained to 0<=x<=1
-struct UnitSize {
+public struct UnitSize {
     private var _size : CGSize
     init(width: UnitValue, height: UnitValue) {
         self._size = CGSize(width:width.value, height:height.value)

@@ -9,7 +9,7 @@
 import SwiftUI
 
 
-struct Chart<D, Coords: CoordinateSystem> : View
+public struct Chart<D, Coords: CoordinateSystem> : View
 {
     let size: CGSize
     let data: [D]
@@ -17,18 +17,20 @@ struct Chart<D, Coords: CoordinateSystem> : View
     let coords: Coords
     let plots: [ChartPlot<D, Coords>]
     let annotations: [AnyView] = []
-    let blendMode: ChartLayerBlendMode
+    let blendMode: ChartBlendMode
     let style: ChartStyle
     
+    @Environment(\.viewAnnotation) private var va
 
-    init(
+
+    public init(
         size: CGSize = CGSize(width:200, height:200),
         data: [D],
         labels: @escaping (D) -> String? = { d in "\(d)" },
         coords: Coords, //= Cartesian(axes:[.xAxis : (.labelGuide,""), .yAxis : (.linearGuide,"") ]),
         plots: [ChartPlot<D, Coords>],
   //      annotations: [AnyView] = [],
-        blendMode: ChartLayerBlendMode,
+        blendMode: ChartBlendMode,
         style: ChartStyle = ChartStyle()
         
     ) {
@@ -42,14 +44,14 @@ struct Chart<D, Coords: CoordinateSystem> : View
         self.style = style
     }
     
-    init(
+    public init(
         size: CGSize = CGSize(width:200, height:200),
         data: [D],
         labels: KeyPath<D,String>,
         coords: Coords,
         plots: [ChartPlot<D, Coords>],
   //      annotations: [AnyView] = [],
-        blendMode: ChartLayerBlendMode,
+        blendMode: ChartBlendMode,
         style: ChartStyle = ChartStyle()
     ) {
         self.size = size
@@ -71,6 +73,16 @@ struct Chart<D, Coords: CoordinateSystem> : View
         // the coordinate system determines the scales, given the data and the plot guides
         return self.coords.determineGuideScales(data:self.data, plots: plots, labels: data.map( self.labels ))
     }
+    
+    /// Determine the size and position of the chart within the outer frame
+    func determineChartSections<Content:View>(geometry: GeometryProxy, requestedSize: CGSize, forScale scale: PlacedDeterminedScales<Coords.AllowedGuidePlacements>, @ViewBuilder builder: @escaping (ChartSections<Coords.AllowedGuidePlacements>) -> Content) -> Content {
+        return builder(self.doDetermineSections(frame: geometry.frame(in: .local), fullArea: requestedSize, forScale: scale))
+    }
+    
+    func doDetermineSections(frame: CGRect, fullArea: CGSize, forScale scale:PlacedDeterminedScales<Coords.AllowedGuidePlacements>) -> ChartSections<Coords.AllowedGuidePlacements> {
+        self.coords.determineChartSections(frame: frame, fullArea: fullArea, plotPercentage: 0.7, forScale: scale)
+    }
+    
     
     /// Merge and reprocess similar  plots in order to blend several plots into potentially different plots
     func doPlotMerge() -> [ChartPlot<D, Coords>] {
@@ -94,21 +106,31 @@ struct Chart<D, Coords: CoordinateSystem> : View
         return builder(self.doPlotMerge())
     }
     
-    func renderPlot(plot: ChartPlot<D, Coords>, scales: PlacedDeterminedScales<Coords.AllowedGuidePlacements>) -> AnyView {
-        return plot.render(withCoords: self.coords, ofSize: self.size, for: self.data, scales: scales, style: self.style)
+    func renderPlot(sections: ChartSections<Coords.AllowedGuidePlacements>, plot: ChartPlot<D, Coords>, scales: PlacedDeterminedScales<Coords.AllowedGuidePlacements>) -> AnyView  {
+
+        va?["chartCoordinates"] = self.coords
+        
+        return plot.render(withCoords: self.coords, inArea: sections, for: self.data, scales: scales, style: self.style)
+        .asAnyView
     }
  
-    var body: some View {
-        self.plotMerge { mergedPlots in
-            self.determineScales(forPlots: mergedPlots) { scales in
-                ZStack {
-                    ForEach(mergedPlots) { plot in
-                        self.renderPlot(plot: plot, scales: scales)
+    public var body: some View {
+        GeometryReader { geometry in
+                self.plotMerge { mergedPlots in
+                    self.determineScales(forPlots: mergedPlots) { scales in
+                        self.determineChartSections(geometry: geometry, requestedSize: self.size, forScale: scales) { sections in
+                            ZStack {
+                                ForEach(mergedPlots) { plot in
+                                    self.renderPlot(sections: sections, plot: plot, scales: scales)
+                                }
+                                self.coords.drawAxes(chartSections: sections, forDeterminedScales: scales, style: self.style)
+                            }.position(geometry.frame(in: .local).center)
                     }
-                    self.coords.drawAxes(chartSize: self.size, forDeterminedScales: scales, style: self.style)
                 }
             }
         }
+        .frame(width: size.width, height: size.height, alignment: Alignment(horizontal: .center, vertical: .center))
+
     }
 }
 

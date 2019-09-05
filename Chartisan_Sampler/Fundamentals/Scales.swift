@@ -8,12 +8,15 @@
 
 import Foundation
 
-protocol MeasurableScale {
+public protocol MeasurableScale {
     func majorSteps() -> [ChartStep]
     func interceptPosn() -> UnitValue
+    func centreTextBetweenSteps() -> Bool
+    func reverseLabelsHint() -> Bool
+    func majorStepWidth() -> UnitValue
 }
 
-protocol GuideScale : MeasurableScale {
+public protocol GuideScale : MeasurableScale {
     init()
     mutating func mergeData<D>(data:[D], mappings:[(D) -> Double?])
     func format(_ value: Double) -> String
@@ -21,7 +24,7 @@ protocol GuideScale : MeasurableScale {
     subscript(value:Double) -> UnitValue {get}
 }
 
-protocol LabelsScale : MeasurableScale {
+public protocol TextScale : MeasurableScale {
     init(labels: [String?])
     subscript(idx:Int) -> String? {get}
 }

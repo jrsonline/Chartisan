@@ -145,11 +145,12 @@ class BarChart<D, Coords: CoordinateSystem> : ChartPlot<D, Coords>
                               on: slice.guide)
     }
     
-    override func render(withCoords coords: Coords, ofSize size: CGSize, for data:[D], scales: PlacedDeterminedScales<Coords.AllowedGuidePlacements>, style: ChartStyle) -> AnyView {
+    override func render(withCoords coords: Coords, inArea area: ChartSections<Coords.AllowedGuidePlacements>, for data:[D], scales: PlacedDeterminedScales<Coords.AllowedGuidePlacements>, style: ChartStyle) -> AnyView {
         guard !data.isEmpty else { return EmptyView().asAnyView }
         
         let indexableSlices = IndexedItem.box(slices)
         let indexableData = IndexedItem.box(data)
+        let size = area.plotArea.size
 
         return ZStack {
             ForEach(indexableSlices) { slice in
@@ -159,12 +160,13 @@ class BarChart<D, Coords: CoordinateSystem> : ChartPlot<D, Coords>
                              withItem: d,
                              ofNumber: data.count,
                              fromSize: size,
-                             scalingBy: scales[slice.dt.guide]?.0.getGuideScale()
+                             scalingBy: scales.placedAt[slice.dt.guide]?.0.getGuideScale()
                     ).fill(slice.dt.colour.colourFor(idx: d.id, datum: d.dt))
                 }
             }
         }.frame(width: size.width,  height: size.height)
-            .asAnyView
+        .position(area.plotArea.center)
+        .asAnyView
     }
     
     override func mappingForGuidePlacement(_ placement: Coords.AllowedGuidePlacements) -> [(D) -> Double?] {
@@ -172,7 +174,7 @@ class BarChart<D, Coords: CoordinateSystem> : ChartPlot<D, Coords>
         return self.slices.filter ({ $0.guide == placement }).map( {$0.top })
     }
 
-    override func merge(plots: [ChartPlot<D, Coords>], blendMode: ChartLayerBlendMode) -> [ChartPlot<D, Coords>] {
+    override func merge(plots: [ChartPlot<D, Coords>], blendMode: ChartBlendMode) -> [ChartPlot<D, Coords>] {
         guard (plots.allSatisfy { $0.mergeKey == self.mergeKey }) else {fatalError("Trying to merge charts with different merge keys")}
         var allSlices = Array<BarSlice<D, Coords.AllowedGuidePlacements>>()
         for plot in plots {

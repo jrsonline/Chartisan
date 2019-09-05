@@ -8,9 +8,14 @@
 
 import UIKit
 
+public var debugViewAnnotation = ViewAnnotation.debug
+
+public func getAnnotations() -> ViewAnnotation {
+    return debugViewAnnotation
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {

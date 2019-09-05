@@ -8,9 +8,9 @@
 
 import SwiftUI
 
-struct IndexedItem<A> : Identifiable {
-    let id: Int
-    let dt: A
+public struct IndexedItem<A> : Identifiable {
+    public let id: Int
+    public let dt: A
     
     static func box(_ data:[A]) -> [IndexedItem<A>] {
         zip(0...,data).map(IndexedItem.init)
@@ -35,8 +35,26 @@ func zipCombine<A,B>(_ aas:[A], _ bbs:[B]) -> [(A,B)] {
     return combination
 }
 
+precedencegroup BindingPrecedence {
+    lowerThan: CastingPrecedence
+    associativity: left
+}
 
-func dformat(_ value: Double, formatter: NumberFormatter? = nil ) -> String {
+infix operator • : BindingPrecedence
+
+func • <A,B,C>(a:@escaping (B)->C, b:@escaping (A)->B ) -> (A)->C {
+    return { x in
+        a(b(x))
+    }
+}
+
+//func >>> <A,B>(a: A,b:@escaping (A)->B ) -> B {
+//    return b(a)
+//}
+
+
+
+public func dformat(_ value: Double, formatter: NumberFormatter? = nil ) -> String {
     let withFormatter: NumberFormatter
     if formatter == nil {
         // Set up a reasonable default

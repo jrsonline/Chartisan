@@ -61,7 +61,7 @@ struct BarSlice<D, AllowedGuidePlacement>  {
         return xs + [ x.liftUp(lastSlice.top ) ]
     }
     
-    static func blend(blendMode: ChartLayerBlendMode, slices: [BarSlice<D,AllowedGuidePlacement>]) -> [BarSlice<D,AllowedGuidePlacement>] {
+    static func blend(blendMode: ChartBlendMode, slices: [BarSlice<D,AllowedGuidePlacement>]) -> [BarSlice<D,AllowedGuidePlacement>] {
         switch blendMode {
         case .stack:
             return slices.reduce([]) { xs, x in self.blendByLifting(orig: xs, merging: x) }

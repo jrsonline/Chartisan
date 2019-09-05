@@ -7,62 +7,185 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "B368AE95-27BE-438C-AE7F-8BE753D584D4"
+            uuid = "FD457E71-C1E4-4D80-8FC2-9576E9165B62"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Chartisan_Sampler/Fundamentals/RotatableLabel.swift"
+            timestampString = "0"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "147"
+            endingLineNumber = "147"
+            landmarkName = "RotatableLabelSet"
+            landmarkType = "14">
+            <Locations>
+               <Location
+                  uuid = "FD457E71-C1E4-4D80-8FC2-9576E9165B62 - b17f6b9d9ec5315e"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Chartisan_Sampler.RotatableLabelSet.(getBestTextSizeAndOrientation in _D2CEFB4E460A2BAF7E098CC70D8E8689)() -&gt; (textSize: CoreGraphics.CGFloat, rotated: Swift.Bool)"
+                  moduleName = "Chartisan_Sampler"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/redpanda/Dropbox/Code%20Projects%20Dropbox/Chartisan_Sampler/Chartisan_Sampler/Fundamentals/RotatableLabel.swift"
+                  timestampString = "0"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "78"
+                  endingLineNumber = "78"
+                  offsetFromSymbolStart = "468">
+               </Location>
+               <Location
+                  uuid = "FD457E71-C1E4-4D80-8FC2-9576E9165B62 - b17f6b9d9ec5315e"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Chartisan_Sampler.RotatableLabelSet.(getBestTextSizeAndOrientation in _D2CEFB4E460A2BAF7E098CC70D8E8689)() -&gt; (textSize: CoreGraphics.CGFloat, rotated: Swift.Bool)"
+                  moduleName = "Chartisan_Sampler"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/redpanda/Dropbox/Code%20Projects%20Dropbox/Chartisan_Sampler/Chartisan_Sampler/Fundamentals/RotatableLabel.swift"
+                  timestampString = "0"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "78"
+                  endingLineNumber = "78"
+                  offsetFromSymbolStart = "2692">
+               </Location>
+               <Location
+                  uuid = "FD457E71-C1E4-4D80-8FC2-9576E9165B62 - b17f6b9d9ec5315e"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Chartisan_Sampler.RotatableLabelSet.(getBestTextSizeAndOrientation in _D2CEFB4E460A2BAF7E098CC70D8E8689)() -&gt; (textSize: CoreGraphics.CGFloat, rotated: Swift.Bool)"
+                  moduleName = "Chartisan_Sampler"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/redpanda/Dropbox/Code%20Projects%20Dropbox/Chartisan_Sampler/Chartisan_Sampler/Fundamentals/RotatableLabel.swift"
+                  timestampString = "0"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "78"
+                  endingLineNumber = "78"
+                  offsetFromSymbolStart = "5090">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "871350ED-2A61-49FB-9069-161B2D5BAE8C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Chartisan_Sampler/Fundamentals/RotatableLabel.swift"
+            timestampString = "0"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "169"
+            endingLineNumber = "169"
+            landmarkName = "getBestTextSizePositionAndOrientation()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7B0DFE18-6322-4697-BC06-9AF5AD557456"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Chartisan_Sampler/Fundamentals/RotatableLabel.swift"
+            timestampString = "0"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
+            landmarkName = "StepAlignment"
+            landmarkType = "13">
+            <Locations>
+               <Location
+                  uuid = "7B0DFE18-6322-4697-BC06-9AF5AD557456 - 61ff82f56fd7e083"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Chartisan_Sampler.RotatableLabelSet.StepAlignment.adjust(position: __C.CGPoint, forRotation: Swift.Bool) -&gt; __C.CGPoint"
+                  moduleName = "Chartisan_Sampler"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/redpanda/Dropbox/Code%20Projects%20Dropbox/Chartisan_Sampler/Chartisan_Sampler/Fundamentals/RotatableLabel.swift"
+                  timestampString = "0"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "52"
+                  endingLineNumber = "52"
+                  offsetFromSymbolStart = "244">
+               </Location>
+               <Location
+                  uuid = "7B0DFE18-6322-4697-BC06-9AF5AD557456 - 61ff82f56fd7e083"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Chartisan_Sampler.RotatableLabelSet.StepAlignment.adjust(position: __C.CGPoint, forRotation: Swift.Bool) -&gt; __C.CGPoint"
+                  moduleName = "Chartisan_Sampler"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/redpanda/Dropbox/Code%20Projects%20Dropbox/Chartisan_Sampler/Chartisan_Sampler/Fundamentals/RotatableLabel.swift"
+                  timestampString = "0"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "52"
+                  endingLineNumber = "52"
+                  offsetFromSymbolStart = "287">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C2D16002-E0A5-45BC-93C4-BD2BAB0036F9"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Chartisan_Sampler/Axes/Cartesian.swift"
+            timestampString = "0"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "180"
-            endingLineNumber = "180"
-            landmarkName = "textWidthStandardizer(_:withFont:maxWidth:maxRotatedWidth:builder:)"
+            startingLineNumber = "151"
+            endingLineNumber = "151"
+            landmarkName = "drawAxisPath(sections:scales:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "B368AE95-27BE-438C-AE7F-8BE753D584D4 - bcb1d1b8a8affb35"
+                  uuid = "C2D16002-E0A5-45BC-93C4-BD2BAB0036F9 - c0b7852f5c19c874"
                   shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "Chartisan_Sampler.Cartesian.(textWidthStandardizer in _30A3FC2EE081BF3AAF56F97277A0E58F)&lt;A where A: SwiftUI.View&gt;(_: Swift.Array&lt;Swift.String&gt;, withFont: __C.UIFont, maxWidth: CoreGraphics.CGFloat, maxRotatedWidth: CoreGraphics.CGFloat, builder: (CoreGraphics.CGFloat, Swift.Bool) -&gt; A) -&gt; A"
+                  symbolName = "Chartisan_Sampler.Cartesian.(drawAxisPath in _30A3FC2EE081BF3AAF56F97277A0E58F)(sections: Chartisan_Sampler.ChartSections&lt;Chartisan_Sampler.CartesianGuidePlacement&gt;, scales: Chartisan_Sampler.PlacedDeterminedScales&lt;Chartisan_Sampler.CartesianGuidePlacement&gt;) -&gt; SwiftUI.AnyView"
                   moduleName = "Chartisan_Sampler"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/redpanda/Dropbox/Code%20Projects%20Dropbox/Chartisan_Sampler/Chartisan_Sampler/Axes/Cartesian.swift"
+                  timestampString = "0"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "180"
-                  endingLineNumber = "180"
-                  offsetFromSymbolStart = "823">
+                  startingLineNumber = "153"
+                  endingLineNumber = "153"
+                  offsetFromSymbolStart = "1531">
                </Location>
                <Location
-                  uuid = "B368AE95-27BE-438C-AE7F-8BE753D584D4 - bcb1d1b8a8affb35"
+                  uuid = "C2D16002-E0A5-45BC-93C4-BD2BAB0036F9 - 903ee37dc05f6bdd"
                   shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "Chartisan_Sampler.Cartesian.(textWidthStandardizer in _30A3FC2EE081BF3AAF56F97277A0E58F)&lt;A where A: SwiftUI.View&gt;(_: Swift.Array&lt;Swift.String&gt;, withFont: __C.UIFont, maxWidth: CoreGraphics.CGFloat, maxRotatedWidth: CoreGraphics.CGFloat, builder: (CoreGraphics.CGFloat, Swift.Bool) -&gt; A) -&gt; A"
+                  symbolName = "closure #1 (inout SwiftUI.Path) -&gt; () in Chartisan_Sampler.Cartesian.(drawAxisPath in _30A3FC2EE081BF3AAF56F97277A0E58F)(sections: Chartisan_Sampler.ChartSections&lt;Chartisan_Sampler.CartesianGuidePlacement&gt;, scales: Chartisan_Sampler.PlacedDeterminedScales&lt;Chartisan_Sampler.CartesianGuidePlacement&gt;) -&gt; SwiftUI.AnyView"
                   moduleName = "Chartisan_Sampler"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/redpanda/Dropbox/Code%20Projects%20Dropbox/Chartisan_Sampler/Chartisan_Sampler/Axes/Cartesian.swift"
+                  timestampString = "0"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "180"
-                  endingLineNumber = "180"
-                  offsetFromSymbolStart = "2630">
-               </Location>
-               <Location
-                  uuid = "B368AE95-27BE-438C-AE7F-8BE753D584D4 - bcb1d1b8a8affb35"
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Chartisan_Sampler.Cartesian.(textWidthStandardizer in _30A3FC2EE081BF3AAF56F97277A0E58F)&lt;A where A: SwiftUI.View&gt;(_: Swift.Array&lt;Swift.String&gt;, withFont: __C.UIFont, maxWidth: CoreGraphics.CGFloat, maxRotatedWidth: CoreGraphics.CGFloat, builder: (CoreGraphics.CGFloat, Swift.Bool) -&gt; A) -&gt; A"
-                  moduleName = "Chartisan_Sampler"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/redpanda/Dropbox/Code%20Projects%20Dropbox/Chartisan_Sampler/Chartisan_Sampler/Axes/Cartesian.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "180"
-                  endingLineNumber = "180"
-                  offsetFromSymbolStart = "4573">
+                  startingLineNumber = "154"
+                  endingLineNumber = "154"
+                  offsetFromSymbolStart = "602">
                </Location>
             </Locations>
          </BreakpointContent>

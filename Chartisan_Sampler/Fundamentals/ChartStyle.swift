@@ -8,12 +8,12 @@
 
 import SwiftUI
 
-struct ChartStyle {
+public struct ChartStyle {
     let labelFont : UIFont
     let labelFontColour : Color
     let numberFormatter: (_ value: Double, _ formatter: NumberFormatter) -> String
 
-    init(
+    public init(
         labelFont : UIFont = Font.body.getUIFont(),
         labelFontColour : Color = .primary,
         numberFormatter: @escaping (_ value: Double, _ formatter: NumberFormatter) -> String = dformat) {

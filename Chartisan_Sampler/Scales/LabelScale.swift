@@ -8,8 +8,7 @@
 
 import Foundation
 
-struct AllLabelScale: LabelsScale {
-
+struct LabelScale: TextScale, Equatable {
     let labels : [String?]
     let labelSteps : [ChartStep]
     
@@ -28,6 +27,18 @@ struct AllLabelScale: LabelsScale {
     func majorSteps() -> [ChartStep] {
         return labelSteps
     }
+    
+    func reverseLabelsHint() -> Bool {
+        true
+    }
+    
+    func centreTextBetweenSteps() -> Bool {
+        true
+    }
+    
+    func majorStepWidth() -> UnitValue {
+        return UnitValue(1.0/labelSteps.count.asDouble)
+    }
 
     func interceptPosn() -> UnitValue {
         return UnitValue.zero
@@ -37,5 +48,8 @@ struct AllLabelScale: LabelsScale {
         return labels[idx]
     }
     
+    static func == (lhs: LabelScale, rhs: LabelScale) -> Bool {
+        (lhs.labels == rhs.labels) && (lhs.labelSteps == rhs.labelSteps)
+    }
     
 }

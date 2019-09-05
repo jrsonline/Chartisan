@@ -7,10 +7,10 @@
 //
 
 import Foundation
+import CoreGraphics
 
-
-enum DeterminedScale {
-    case labelScale(LabelsScale)
+public enum DeterminedScale  {
+    case labelScale(TextScale)
     case guideScale(GuideScale)
     
     func getGuideScale() -> GuideScale? {
@@ -19,7 +19,7 @@ enum DeterminedScale {
             default: return nil
         }
     }
-    func getLabelScale() -> LabelsScale? {
+    func getLabelScale() -> TextScale? {
         switch self {
             case .labelScale(let l): return l
             default: return nil
@@ -32,10 +32,17 @@ enum DeterminedScale {
             case .guideScale(let guideScale): return guideScale as MeasurableScale
         }
     }
+    
 }
 
-typealias PlacedDeterminedScales<P:Hashable> = [P : (DeterminedScale,String)]
+public struct PlacedDeterminedScales<P:Hashable> {
+    var placedAt : [P : (DeterminedScale,String)]
+    
+    init() {
+        placedAt = [:]
+    }
+}
 
-enum GuidePlacement {
+public enum GuidePlacement {
     case xAxis, yAxis, x2ndAxis, y2ndAxis, polarAxis, zAxis // etc
 }

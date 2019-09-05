@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "enabled" : false,
+      "target" : {
+        "containerPath" : "container:Chartisan_Sampler.xcodeproj",
+        "identifier" : "C014BFC2231CB67D0090AA0C",
+        "name" : "Chartisan_SamplerUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

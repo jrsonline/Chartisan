@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct LinearScale : GuideScale {
+struct LinearScale : GuideScale, Equatable {
     var max: Double? = nil
     var min: Double? = nil
     var chartSteps: [ChartStep] = []
@@ -88,12 +88,24 @@ struct LinearScale : GuideScale {
         return self[0.0]
     }
     
+    func centreTextBetweenSteps() -> Bool {
+        false
+    }
+        
+    func reverseLabelsHint() -> Bool {
+        false
+    }
+    
     func majorSteps() -> [ChartStep] {
         return chartSteps
     }
 
     func minorSteps() -> [ChartStep] {
         return []
+    }
+    
+    func majorStepWidth() -> UnitValue {
+        return UnitValue(1.0/chartSteps.count.asDouble)
     }
     
     subscript(value: Double) -> UnitValue {

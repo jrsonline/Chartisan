@@ -14,30 +14,46 @@
 		C0092E9222E5074300A6A7BD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0092E9122E5074300A6A7BD /* Preview Assets.xcassets */; };
 		C0092E9522E5074300A6A7BD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0092E9322E5074300A6A7BD /* LaunchScreen.storyboard */; };
 		C00F56B322EDF40500CBDBA8 /* ChartPlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00F56B222EDF40500CBDBA8 /* ChartPlot.swift */; };
-		C00F56B522EDF43200CBDBA8 /* ChartAxis.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00F56B422EDF43200CBDBA8 /* ChartAxis.swift */; };
 		C00F56B722EDF45600CBDBA8 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00F56B622EDF45600CBDBA8 /* Extensions.swift */; };
 		C00F56B922EDF4A500CBDBA8 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00F56B822EDF4A500CBDBA8 /* Helpers.swift */; };
-		C00F56BB22EDF4C600CBDBA8 /* YDoubleXLabelAxis.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00F56BA22EDF4C600CBDBA8 /* YDoubleXLabelAxis.swift */; };
-		C00F56BD22EDF4FF00CBDBA8 /* ChartScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00F56BC22EDF4FF00CBDBA8 /* ChartScale.swift */; };
 		C00F56BF22EDF53B00CBDBA8 /* ColourScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00F56BE22EDF53B00CBDBA8 /* ColourScale.swift */; };
-		C00F56C122EDF57900CBDBA8 /* LabelScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00F56C022EDF57900CBDBA8 /* LabelScale.swift */; };
 		C00F56C322EDF5AF00CBDBA8 /* BarSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00F56C222EDF5AF00CBDBA8 /* BarSlice.swift */; };
 		C00F56C522EDF5E800CBDBA8 /* BarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00F56C422EDF5E800CBDBA8 /* BarChart.swift */; };
-		C00F56C722EDF60000CBDBA8 /* Scales_old.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00F56C622EDF60000CBDBA8 /* Scales_old.swift */; };
-		C00F56C922EDF62300CBDBA8 /* ChartLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00F56C822EDF62300CBDBA8 /* ChartLayer.swift */; };
 		C00F56CB22EDF64400CBDBA8 /* Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00F56CA22EDF64400CBDBA8 /* Chart.swift */; };
 		C00F56CD22EDF66700CBDBA8 /* Statistic.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00F56CC22EDF66700CBDBA8 /* Statistic.swift */; };
-		C00F56D322EDF76800CBDBA8 /* DoubleScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00F56D222EDF76800CBDBA8 /* DoubleScale.swift */; };
+		C014BFA8230616090090AA0C /* ChartBlendMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C014BFA7230616090090AA0C /* ChartBlendMode.swift */; };
+		C014BFAA2306166C0090AA0C /* RotatableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C014BFA92306166C0090AA0C /* RotatableLabel.swift */; };
+		C014BFB2230DE91F0090AA0C /* Chartisan_SamplerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C014BFB1230DE91F0090AA0C /* Chartisan_SamplerTests.swift */; };
+		C014BFBA230EC2C20090AA0C /* ChartSections.swift in Sources */ = {isa = PBXBuildFile; fileRef = C014BFB9230EC2C20090AA0C /* ChartSections.swift */; };
+		C014BFBE231C27120090AA0C /* ViewAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C014BFBD231C27120090AA0C /* ViewAnnotation.swift */; };
+		C014BFC6231CB67E0090AA0C /* Chartisan_SamplerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C014BFC5231CB67D0090AA0C /* Chartisan_SamplerUITests.swift */; };
 		C070930C230227DE006BF77F /* ChartStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C070930B230227DE006BF77F /* ChartStyle.swift */; };
 		C0DE2D5F22F121D9004B7E78 /* Cartesian.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE2D5E22F121D9004B7E78 /* Cartesian.swift */; };
 		C0DE2D6122F62816004B7E78 /* UnitValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE2D6022F62816004B7E78 /* UnitValue.swift */; };
-		C0DE2D6322F679BD004B7E78 /* Scales-Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE2D6222F679BD004B7E78 /* Scales-Protocols.swift */; };
+		C0DE2D6322F679BD004B7E78 /* Scales.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE2D6222F679BD004B7E78 /* Scales.swift */; };
 		C0DE2D6522F679F2004B7E78 /* ChartStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE2D6422F679F2004B7E78 /* ChartStep.swift */; };
 		C0DE2D6722F67A14004B7E78 /* LinearScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE2D6622F67A14004B7E78 /* LinearScale.swift */; };
 		C0DE2D6A22F67A6D004B7E78 /* CoordinateSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE2D6922F67A6D004B7E78 /* CoordinateSystem.swift */; };
 		C0DE2D6C22F67ACC004B7E78 /* Guides.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE2D6B22F67ACC004B7E78 /* Guides.swift */; };
-		C0DE2D6E22F67FB3004B7E78 /* AllLabelsScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE2D6D22F67FB3004B7E78 /* AllLabelsScale.swift */; };
+		C0DE2D6E22F67FB3004B7E78 /* LabelScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE2D6D22F67FB3004B7E78 /* LabelScale.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C014BFB4230DE91F0090AA0C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C0092E7D22E5073F00A6A7BD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C0092E8422E5073F00A6A7BD;
+			remoteInfo = Chartisan_Sampler;
+		};
+		C014BFC8231CB67E0090AA0C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C0092E7D22E5073F00A6A7BD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C0092E8422E5073F00A6A7BD;
+			remoteInfo = Chartisan_Sampler;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		C0092E8522E5073F00A6A7BD /* Chartisan_Sampler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chartisan_Sampler.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -49,33 +65,51 @@
 		C0092E9422E5074300A6A7BD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C0092E9622E5074300A6A7BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C00F56B222EDF40500CBDBA8 /* ChartPlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartPlot.swift; sourceTree = "<group>"; };
-		C00F56B422EDF43200CBDBA8 /* ChartAxis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartAxis.swift; sourceTree = "<group>"; };
 		C00F56B622EDF45600CBDBA8 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		C00F56B822EDF4A500CBDBA8 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
-		C00F56BA22EDF4C600CBDBA8 /* YDoubleXLabelAxis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YDoubleXLabelAxis.swift; sourceTree = "<group>"; };
-		C00F56BC22EDF4FF00CBDBA8 /* ChartScale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartScale.swift; sourceTree = "<group>"; };
 		C00F56BE22EDF53B00CBDBA8 /* ColourScale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColourScale.swift; sourceTree = "<group>"; };
-		C00F56C022EDF57900CBDBA8 /* LabelScale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelScale.swift; sourceTree = "<group>"; };
 		C00F56C222EDF5AF00CBDBA8 /* BarSlice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarSlice.swift; sourceTree = "<group>"; };
 		C00F56C422EDF5E800CBDBA8 /* BarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChart.swift; sourceTree = "<group>"; };
-		C00F56C622EDF60000CBDBA8 /* Scales_old.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scales_old.swift; sourceTree = "<group>"; };
-		C00F56C822EDF62300CBDBA8 /* ChartLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartLayer.swift; sourceTree = "<group>"; };
 		C00F56CA22EDF64400CBDBA8 /* Chart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chart.swift; sourceTree = "<group>"; };
 		C00F56CC22EDF66700CBDBA8 /* Statistic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statistic.swift; sourceTree = "<group>"; };
-		C00F56D222EDF76800CBDBA8 /* DoubleScale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleScale.swift; sourceTree = "<group>"; };
+		C014BFA7230616090090AA0C /* ChartBlendMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartBlendMode.swift; sourceTree = "<group>"; };
+		C014BFA92306166C0090AA0C /* RotatableLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RotatableLabel.swift; path = ../RotatableLabel.swift; sourceTree = "<group>"; };
+		C014BFAF230DE91F0090AA0C /* Chartisan_SamplerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Chartisan_SamplerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C014BFB1230DE91F0090AA0C /* Chartisan_SamplerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chartisan_SamplerTests.swift; sourceTree = "<group>"; };
+		C014BFB3230DE91F0090AA0C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C014BFB9230EC2C20090AA0C /* ChartSections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChartSections.swift; path = ../ChartSections.swift; sourceTree = "<group>"; };
+		C014BFBD231C27120090AA0C /* ViewAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAnnotation.swift; sourceTree = "<group>"; };
+		C014BFC3231CB67D0090AA0C /* Chartisan_SamplerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Chartisan_SamplerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C014BFC5231CB67D0090AA0C /* Chartisan_SamplerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chartisan_SamplerUITests.swift; sourceTree = "<group>"; };
+		C014BFC7231CB67E0090AA0C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C014BFCD231CBA050090AA0C /* Tests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Tests.xctestplan; sourceTree = "<group>"; };
 		C070930B230227DE006BF77F /* ChartStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartStyle.swift; sourceTree = "<group>"; };
 		C0DE2D5E22F121D9004B7E78 /* Cartesian.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cartesian.swift; sourceTree = "<group>"; };
-		C0DE2D6022F62816004B7E78 /* UnitValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitValue.swift; sourceTree = "<group>"; };
-		C0DE2D6222F679BD004B7E78 /* Scales-Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Scales-Protocols.swift"; sourceTree = "<group>"; };
+		C0DE2D6022F62816004B7E78 /* UnitValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UnitValue.swift; path = ../UnitValue.swift; sourceTree = "<group>"; };
+		C0DE2D6222F679BD004B7E78 /* Scales.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scales.swift; sourceTree = "<group>"; };
 		C0DE2D6422F679F2004B7E78 /* ChartStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartStep.swift; sourceTree = "<group>"; };
 		C0DE2D6622F67A14004B7E78 /* LinearScale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearScale.swift; sourceTree = "<group>"; };
 		C0DE2D6922F67A6D004B7E78 /* CoordinateSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateSystem.swift; sourceTree = "<group>"; };
 		C0DE2D6B22F67ACC004B7E78 /* Guides.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Guides.swift; sourceTree = "<group>"; };
-		C0DE2D6D22F67FB3004B7E78 /* AllLabelsScale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllLabelsScale.swift; sourceTree = "<group>"; };
+		C0DE2D6D22F67FB3004B7E78 /* LabelScale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelScale.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		C0092E8222E5073F00A6A7BD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C014BFAC230DE91F0090AA0C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C014BFC0231CB67D0090AA0C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -92,7 +126,9 @@
 				C0092E8722E5073F00A6A7BD /* Chartisan_Sampler */,
 				C00F56B622EDF45600CBDBA8 /* Extensions.swift */,
 				C00F56B822EDF4A500CBDBA8 /* Helpers.swift */,
-				C0DE2D7022F682C3004B7E78 /* Legacy */,
+				C014BFBD231C27120090AA0C /* ViewAnnotation.swift */,
+				C014BFB0230DE91F0090AA0C /* Chartisan_SamplerTests */,
+				C014BFC4231CB67D0090AA0C /* Chartisan_SamplerUITests */,
 				C0092E8622E5073F00A6A7BD /* Products */,
 			);
 			sourceTree = "<group>";
@@ -101,6 +137,8 @@
 			isa = PBXGroup;
 			children = (
 				C0092E8522E5073F00A6A7BD /* Chartisan_Sampler.app */,
+				C014BFAF230DE91F0090AA0C /* Chartisan_SamplerTests.xctest */,
+				C014BFC3231CB67D0090AA0C /* Chartisan_SamplerUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -109,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				C0092E8822E5073F00A6A7BD /* AppDelegate.swift */,
+				C014BFCD231CBA050090AA0C /* Tests.xctestplan */,
 				C0092E8C22E5073F00A6A7BD /* ContentView.swift */,
 				C0092E8E22E5074300A6A7BD /* Assets.xcassets */,
 				C0092E9322E5074300A6A7BD /* LaunchScreen.storyboard */,
@@ -118,6 +157,7 @@
 				C00F56CE22EDF6F100CBDBA8 /* Axes */,
 				C00F56CF22EDF70900CBDBA8 /* Scales */,
 				C00F56D022EDF71200CBDBA8 /* BarChart */,
+				C0EC3B82231D62A700273CD3 /* Construction */,
 			);
 			path = Chartisan_Sampler;
 			sourceTree = "<group>";
@@ -142,7 +182,7 @@
 		C00F56CF22EDF70900CBDBA8 /* Scales */ = {
 			isa = PBXGroup;
 			children = (
-				C0DE2D6D22F67FB3004B7E78 /* AllLabelsScale.swift */,
+				C0DE2D6D22F67FB3004B7E78 /* LabelScale.swift */,
 				C00F56BE22EDF53B00CBDBA8 /* ColourScale.swift */,
 				C0DE2D6622F67A14004B7E78 /* LinearScale.swift */,
 			);
@@ -164,27 +204,42 @@
 				C00F56CA22EDF64400CBDBA8 /* Chart.swift */,
 				C00F56B222EDF40500CBDBA8 /* ChartPlot.swift */,
 				C0DE2D6922F67A6D004B7E78 /* CoordinateSystem.swift */,
-				C0DE2D6222F679BD004B7E78 /* Scales-Protocols.swift */,
+				C0DE2D6222F679BD004B7E78 /* Scales.swift */,
 				C0DE2D6B22F67ACC004B7E78 /* Guides.swift */,
 				C00F56CC22EDF66700CBDBA8 /* Statistic.swift */,
-				C0DE2D6022F62816004B7E78 /* UnitValue.swift */,
 				C070930B230227DE006BF77F /* ChartStyle.swift */,
+				C014BFA7230616090090AA0C /* ChartBlendMode.swift */,
 			);
 			path = Fundamentals;
 			sourceTree = "<group>";
 		};
-		C0DE2D7022F682C3004B7E78 /* Legacy */ = {
+		C014BFB0230DE91F0090AA0C /* Chartisan_SamplerTests */ = {
 			isa = PBXGroup;
 			children = (
-				C00F56B422EDF43200CBDBA8 /* ChartAxis.swift */,
-				C00F56BA22EDF4C600CBDBA8 /* YDoubleXLabelAxis.swift */,
-				C00F56BC22EDF4FF00CBDBA8 /* ChartScale.swift */,
-				C00F56D222EDF76800CBDBA8 /* DoubleScale.swift */,
-				C00F56C022EDF57900CBDBA8 /* LabelScale.swift */,
-				C00F56C622EDF60000CBDBA8 /* Scales_old.swift */,
-				C00F56C822EDF62300CBDBA8 /* ChartLayer.swift */,
+				C014BFB1230DE91F0090AA0C /* Chartisan_SamplerTests.swift */,
+				C014BFB3230DE91F0090AA0C /* Info.plist */,
 			);
-			path = Legacy;
+			path = Chartisan_SamplerTests;
+			sourceTree = "<group>";
+		};
+		C014BFC4231CB67D0090AA0C /* Chartisan_SamplerUITests */ = {
+			isa = PBXGroup;
+			children = (
+				C014BFC5231CB67D0090AA0C /* Chartisan_SamplerUITests.swift */,
+				C014BFC7231CB67E0090AA0C /* Info.plist */,
+			);
+			path = Chartisan_SamplerUITests;
+			sourceTree = "<group>";
+		};
+		C0EC3B82231D62A700273CD3 /* Construction */ = {
+			isa = PBXGroup;
+			children = (
+				C0DE2D6022F62816004B7E78 /* UnitValue.swift */,
+				C014BFA92306166C0090AA0C /* RotatableLabel.swift */,
+				C014BFB9230EC2C20090AA0C /* ChartSections.swift */,
+			);
+			name = Construction;
+			path = Fundamentals/Construction;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -207,6 +262,42 @@
 			productReference = C0092E8522E5073F00A6A7BD /* Chartisan_Sampler.app */;
 			productType = "com.apple.product-type.application";
 		};
+		C014BFAE230DE91F0090AA0C /* Chartisan_SamplerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C014BFB6230DE91F0090AA0C /* Build configuration list for PBXNativeTarget "Chartisan_SamplerTests" */;
+			buildPhases = (
+				C014BFAB230DE91F0090AA0C /* Sources */,
+				C014BFAC230DE91F0090AA0C /* Frameworks */,
+				C014BFAD230DE91F0090AA0C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C014BFB5230DE91F0090AA0C /* PBXTargetDependency */,
+			);
+			name = Chartisan_SamplerTests;
+			productName = Chartisan_SamplerTests;
+			productReference = C014BFAF230DE91F0090AA0C /* Chartisan_SamplerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		C014BFC2231CB67D0090AA0C /* Chartisan_SamplerUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C014BFCA231CB67E0090AA0C /* Build configuration list for PBXNativeTarget "Chartisan_SamplerUITests" */;
+			buildPhases = (
+				C014BFBF231CB67D0090AA0C /* Sources */,
+				C014BFC0231CB67D0090AA0C /* Frameworks */,
+				C014BFC1231CB67D0090AA0C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C014BFC9231CB67E0090AA0C /* PBXTargetDependency */,
+			);
+			name = Chartisan_SamplerUITests;
+			productName = Chartisan_SamplerUITests;
+			productReference = C014BFC3231CB67D0090AA0C /* Chartisan_SamplerUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -219,6 +310,14 @@
 				TargetAttributes = {
 					C0092E8422E5073F00A6A7BD = {
 						CreatedOnToolsVersion = 11.0;
+					};
+					C014BFAE230DE91F0090AA0C = {
+						CreatedOnToolsVersion = 11.0;
+						TestTargetID = C0092E8422E5073F00A6A7BD;
+					};
+					C014BFC2231CB67D0090AA0C = {
+						CreatedOnToolsVersion = 11.0;
+						TestTargetID = C0092E8422E5073F00A6A7BD;
 					};
 				};
 			};
@@ -236,6 +335,8 @@
 			projectRoot = "";
 			targets = (
 				C0092E8422E5073F00A6A7BD /* Chartisan_Sampler */,
+				C014BFAE230DE91F0090AA0C /* Chartisan_SamplerTests */,
+				C014BFC2231CB67D0090AA0C /* Chartisan_SamplerUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -251,6 +352,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C014BFAD230DE91F0090AA0C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C014BFC1231CB67D0090AA0C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -259,36 +374,62 @@
 			buildActionMask = 2147483647;
 			files = (
 				C00F56CD22EDF66700CBDBA8 /* Statistic.swift in Sources */,
-				C0DE2D6322F679BD004B7E78 /* Scales-Protocols.swift in Sources */,
-				C00F56C122EDF57900CBDBA8 /* LabelScale.swift in Sources */,
+				C014BFAA2306166C0090AA0C /* RotatableLabel.swift in Sources */,
+				C0DE2D6322F679BD004B7E78 /* Scales.swift in Sources */,
+				C014BFA8230616090090AA0C /* ChartBlendMode.swift in Sources */,
 				C00F56BF22EDF53B00CBDBA8 /* ColourScale.swift in Sources */,
 				C0DE2D6122F62816004B7E78 /* UnitValue.swift in Sources */,
-				C0DE2D6E22F67FB3004B7E78 /* AllLabelsScale.swift in Sources */,
-				C00F56D322EDF76800CBDBA8 /* DoubleScale.swift in Sources */,
+				C0DE2D6E22F67FB3004B7E78 /* LabelScale.swift in Sources */,
 				C0092E8922E5073F00A6A7BD /* AppDelegate.swift in Sources */,
+				C014BFBA230EC2C20090AA0C /* ChartSections.swift in Sources */,
 				C00F56B922EDF4A500CBDBA8 /* Helpers.swift in Sources */,
 				C0DE2D6C22F67ACC004B7E78 /* Guides.swift in Sources */,
-				C00F56C922EDF62300CBDBA8 /* ChartLayer.swift in Sources */,
-				C00F56C722EDF60000CBDBA8 /* Scales_old.swift in Sources */,
-				C00F56BD22EDF4FF00CBDBA8 /* ChartScale.swift in Sources */,
 				C0092E8B22E5073F00A6A7BD /* SceneDelegate.swift in Sources */,
 				C00F56CB22EDF64400CBDBA8 /* Chart.swift in Sources */,
-				C00F56BB22EDF4C600CBDBA8 /* YDoubleXLabelAxis.swift in Sources */,
 				C0DE2D6A22F67A6D004B7E78 /* CoordinateSystem.swift in Sources */,
 				C00F56C522EDF5E800CBDBA8 /* BarChart.swift in Sources */,
 				C0092E8D22E5073F00A6A7BD /* ContentView.swift in Sources */,
 				C0DE2D6722F67A14004B7E78 /* LinearScale.swift in Sources */,
 				C070930C230227DE006BF77F /* ChartStyle.swift in Sources */,
 				C00F56B322EDF40500CBDBA8 /* ChartPlot.swift in Sources */,
-				C00F56B522EDF43200CBDBA8 /* ChartAxis.swift in Sources */,
 				C0DE2D6522F679F2004B7E78 /* ChartStep.swift in Sources */,
 				C00F56C322EDF5AF00CBDBA8 /* BarSlice.swift in Sources */,
+				C014BFBE231C27120090AA0C /* ViewAnnotation.swift in Sources */,
 				C00F56B722EDF45600CBDBA8 /* Extensions.swift in Sources */,
 				C0DE2D5F22F121D9004B7E78 /* Cartesian.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C014BFAB230DE91F0090AA0C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C014BFB2230DE91F0090AA0C /* Chartisan_SamplerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C014BFBF231CB67D0090AA0C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C014BFC6231CB67E0090AA0C /* Chartisan_SamplerUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C014BFB5230DE91F0090AA0C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C0092E8422E5073F00A6A7BD /* Chartisan_Sampler */;
+			targetProxy = C014BFB4230DE91F0090AA0C /* PBXContainerItemProxy */;
+		};
+		C014BFC9231CB67E0090AA0C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C0092E8422E5073F00A6A7BD /* Chartisan_Sampler */;
+			targetProxy = C014BFC8231CB67E0090AA0C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		C0092E9322E5074300A6A7BD /* LaunchScreen.storyboard */ = {
@@ -456,6 +597,84 @@
 			};
 			name = Release;
 		};
+		C014BFB7230DE91F0090AA0C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 447HR6TL3C;
+				INFOPLIST_FILE = Chartisan_SamplerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.strictlyswift.Chartisan-SamplerTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Chartisan_Sampler.app/Chartisan_Sampler";
+			};
+			name = Debug;
+		};
+		C014BFB8230DE91F0090AA0C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 447HR6TL3C;
+				INFOPLIST_FILE = Chartisan_SamplerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.strictlyswift.Chartisan-SamplerTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Chartisan_Sampler.app/Chartisan_Sampler";
+			};
+			name = Release;
+		};
+		C014BFCB231CB67E0090AA0C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 447HR6TL3C;
+				INFOPLIST_FILE = Chartisan_SamplerUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.strictlyswift.Chartisan-SamplerUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Chartisan_Sampler;
+			};
+			name = Debug;
+		};
+		C014BFCC231CB67E0090AA0C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 447HR6TL3C;
+				INFOPLIST_FILE = Chartisan_SamplerUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.strictlyswift.Chartisan-SamplerUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Chartisan_Sampler;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -473,6 +692,24 @@
 			buildConfigurations = (
 				C0092E9A22E5074300A6A7BD /* Debug */,
 				C0092E9B22E5074300A6A7BD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C014BFB6230DE91F0090AA0C /* Build configuration list for PBXNativeTarget "Chartisan_SamplerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C014BFB7230DE91F0090AA0C /* Debug */,
+				C014BFB8230DE91F0090AA0C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C014BFCA231CB67E0090AA0C /* Build configuration list for PBXNativeTarget "Chartisan_SamplerUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C014BFCB231CB67E0090AA0C /* Debug */,
+				C014BFCC231CB67E0090AA0C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

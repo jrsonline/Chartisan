@@ -9,9 +9,15 @@
 import SwiftUI
 
 
-struct ChartStep : Identifiable {
-    let id: Int
+public struct ChartStep : Identifiable, Equatable {
+
+    public let id: Int
     let label: String
     let position: UnitValue
     let width: UnitValue // scaled distance from this step to the next, or to '1' if this is the last step
+    
+    public static func == (lhs: ChartStep, rhs: ChartStep) -> Bool {
+        (lhs.id == rhs.id)
+    }
+    
 }

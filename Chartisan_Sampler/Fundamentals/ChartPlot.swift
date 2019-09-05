@@ -11,11 +11,11 @@ import SwiftUI
 
 import Foundation
 
-class ChartPlot<D, Coords: CoordinateSystem> : Identifiable
+public class ChartPlot<D, Coords: CoordinateSystem> : Identifiable
 {
-    let id: UUID = UUID()
+    public let id: UUID = UUID()
     
-    func render(withCoords coords: Coords, ofSize size: CGSize, for data:[D], scales: PlacedDeterminedScales<Coords.AllowedGuidePlacements>, style: ChartStyle) -> AnyView {
+    func render(withCoords coords: Coords, inArea area: ChartSections<Coords.AllowedGuidePlacements>, for data:[D], scales: PlacedDeterminedScales<Coords.AllowedGuidePlacements>, style: ChartStyle) -> AnyView {
         return EmptyView().asAnyView
     }
     
@@ -25,7 +25,7 @@ class ChartPlot<D, Coords: CoordinateSystem> : Identifiable
     
     var mergeKey : String? = nil
     
-    func merge(plots:[ChartPlot<D, Coords>], blendMode: ChartLayerBlendMode) -> [ChartPlot<D, Coords>] {
+    func merge(plots:[ChartPlot<D, Coords>], blendMode: ChartBlendMode) -> [ChartPlot<D, Coords>] {
         return plots
     }
 
